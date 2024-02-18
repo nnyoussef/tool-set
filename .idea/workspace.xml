@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="AutomaticModuleUnloader">
+    <loaded-modules>
+      <module name="function-chainer" />
+      <module name="tool_set" />
+      <module name="core" />
+    </loaded-modules>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2cEqDohCZwsssP8mKFFz8x5lEOF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.FunctionChainerRunnerTest.executor": "Run",
+    "JUnit.FunctionChainerRunnerTest.functionChaninerDefaultConstructorAccessTest.executor": "Run",
+    "JUnit.FunctionChainerRunnerTest.test1.executor": "Run",
+    "JUnit.WebFluxTest.testContext.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.core [clean].executor": "Run",
+    "Maven.core [compile].executor": "Run",
+    "Maven.core [package].executor": "Run",
+    "Maven.core [test].executor": "Run",
+    "Maven.function-chainer [org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test].executor": "Run",
+    "Maven.function-chainer [org.jacoco:jacoco-maven-plugin:0.7.7.201606060606:report].executor": "Run",
+    "Maven.function-chainer [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/nassi/AquaProjects/core/web-flux-starter/src/main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nassi\AquaProjects\core\web-flux-starter\src\main" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lu.nyo.functionchainer.fs" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="FunctionsRunnerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="function-chainer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lu.nyo.functionrunner.interfaces.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FunctionsRunnerTest.functionChaninerDefaultConstructorAccessTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="function-chainer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lu.nyo.functionrunner.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
+      <option name="METHOD_NAME" value="functionChaninerDefaultConstructorAccessTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FunctionsRunnerTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="function-chainer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lu.nyo.functionrunner.interfaces.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebFluxTest.testContext" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="web-flux-starter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lu.nyo.webfluxstarter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lu.nyo.webfluxstarter" />
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.webfluxstarter.WebFluxTest" />
+      <option name="METHOD_NAME" value="testContext" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="core" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="core" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.FunctionsRunnerTest" />
+        <item itemvalue="JUnit.FunctionsRunnerTest.functionChaninerDefaultConstructorAccessTest" />
+        <item itemvalue="JUnit.WebFluxTest.testContext" />
+        <item itemvalue="JUnit.FunctionsRunnerTest.test1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="" />
+      <created>1707686970806</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707686970806</updated>
+      <workItem from="1707686971822" duration="2067000" />
+      <workItem from="1707729792859" duration="611000" />
+      <workItem from="1708202036144" duration="1690000" />
+      <workItem from="1708219060974" duration="233000" />
+      <workItem from="1708219303563" duration="468000" />
+      <workItem from="1708219779667" duration="660000" />
+      <workItem from="1708220446296" duration="201000" />
+      <workItem from="1708220846187" duration="901000" />
+      <workItem from="1708224932439" duration="22203000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
