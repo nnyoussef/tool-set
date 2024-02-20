@@ -2,6 +2,8 @@ package lu.nyo.webfluxstarter;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +28,8 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 @ComponentScan(basePackages = "lu.nyo.webfluxstarter")
 public class DynamicRouterConfigs {
+    @Autowired
+    public BeanFactory beanFactory;
 
     @Bean("routerConfigs")
     public Map<String, Map<String, String>> get() throws IOException {
@@ -41,7 +45,8 @@ public class DynamicRouterConfigs {
     public HashMap<String, HandlerFunction> getHandlerFunctionsFromServiceProvider() {
         return ServiceLoader.load(HandlerFunction.class)
                 .stream()
-                .collect(Collectors.toMap(e -> e.get().getClass().getCanonicalName(), e -> e.get(), (e1, e2) -> e1, () -> new HashMap<>(100)));
+                .map(m -> beanFactory.getBean(m.get().getClass()))
+                .collect(Collectors.toMap(e -> e.getClass().getCanonicalName(), e -> e, (e1, e2) -> e1, () -> new HashMap<>(100)));
     }
 
     @Bean

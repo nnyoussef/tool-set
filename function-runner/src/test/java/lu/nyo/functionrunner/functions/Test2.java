@@ -1,5 +1,6 @@
 package lu.nyo.functionrunner.functions;
 
+import lu.nyo.functionrunner.interfaces.Context;
 import lu.nyo.functionrunner.interfaces.ExecutionUnit;
 import lu.nyo.functionrunner.dto.State;
 
@@ -8,7 +9,7 @@ import static lu.nyo.functionrunner.enums.PostAction.CONTINUE;
 public class Test2 implements ExecutionUnit<Integer> {
 
     @Override
-    public void execute(Integer input, State state) {
+    public void execute(Integer input, State state, Context context) {
         state.setState(input * 0, CONTINUE);
     }
 

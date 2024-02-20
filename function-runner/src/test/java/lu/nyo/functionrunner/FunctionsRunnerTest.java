@@ -1,6 +1,7 @@
 package lu.nyo.functionrunner;
 
 import lu.nyo.functionrunner.functions.*;
+import lu.nyo.functionrunner.interfaces.Context;
 import lu.nyo.functionrunner.interfaces.ExecutionUnit;
 import lu.nyo.functionrunner.interfaces.FunctionFactory;
 import org.junit.jupiter.api.Assertions;
@@ -34,6 +35,12 @@ public class FunctionsRunnerTest {
                 return (T) new Test3();
         }
     };
+    Context context = new Context() {
+        @Override
+        public FunctionFactory getFunctionFactory() {
+            return functionFactory;
+        }
+    };
 
     private static final Map<String, String> DATA = of("abc", "123");
 
@@ -60,6 +67,7 @@ public class FunctionsRunnerTest {
 
         Integer a = functionsRunner.runWithResult(DATA,
                 0,
+                context,
                 classLinkedHashMap);
 
         Assertions.assertEquals(a, 0);
@@ -78,6 +86,7 @@ public class FunctionsRunnerTest {
 
         Integer a = functionsRunner.runWithResult(DATA,
                 0,
+                context,
                 classLinkedHashMap);
 
         Assertions.assertEquals(a, 0);
@@ -93,6 +102,6 @@ public class FunctionsRunnerTest {
             add(Test2.class);
         }};
 
-        assertThrowsExactly(UnsupportedOperationException.class, () -> functionsRunner.runWithResult(DATA, 0, classLinkedHashMap));
+        assertThrowsExactly(UnsupportedOperationException.class, () -> functionsRunner.runWithResult(DATA, 0, context, classLinkedHashMap));
     }
 }

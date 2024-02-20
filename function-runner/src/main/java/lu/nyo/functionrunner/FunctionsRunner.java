@@ -1,13 +1,13 @@
 package lu.nyo.functionrunner;
 
 import lu.nyo.functionrunner.dto.State;
-import lu.nyo.functionrunner.enums.PostAction;
+import lu.nyo.functionrunner.interfaces.Context;
 import lu.nyo.functionrunner.interfaces.ExecutionUnit;
 import lu.nyo.functionrunner.interfaces.FunctionFactory;
 
 import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Optional;
+
+import static java.util.Optional.ofNullable;
 
 public final class FunctionsRunner {
 
@@ -27,29 +27,29 @@ public final class FunctionsRunner {
 
     public <T> T runWithResult(Object firstInput,
                                T defaultIfNull,
+                               Context context,
                                LinkedList<Class<? extends ExecutionUnit<?>>> executionUnits) {
 
         State state = new State();
 
         ExecutionUnit<Object> executionUnit = functionFactory.create(executionUnits.pop());
 
-        executionUnit.execute(executionUnit.adapt(firstInput), state);
+        executionUnit.execute(executionUnit.adapt(firstInput, context), state, context);
 
         while (!executionUnits.isEmpty()) {
-            try {
-                if (Objects.requireNonNull(state.getPostAction()) == PostAction.STOP) {
-                    executionUnits = new LinkedList<>();
-                } else {
+            if (state.getPostAction() == null)
+                throw new UnsupportedOperationException();
+            switch (state.getPostAction()) {
+                case CONTINUE -> {
                     Class<? extends ExecutionUnit<?>> clazz = executionUnits.pop();
                     executionUnit = functionFactory.create(clazz);
-                    executionUnit.execute(executionUnit.adapt(state.getResultToTransfer()), state);
+                    executionUnit.execute(executionUnit.adapt(state.getResultToTransfer(), context), state, context);
                 }
-            } catch (NullPointerException e) {
-                throw new UnsupportedOperationException();
+                default -> executionUnits.clear();
             }
 
         }
 
-        return Optional.ofNullable(state.getResultToTransfer()).map(d -> ((T) d)).orElse(defaultIfNull);
+        return ofNullable(state.getResultToTransfer()).map(d -> ((T) d)).orElse(defaultIfNull);
     }
 }
