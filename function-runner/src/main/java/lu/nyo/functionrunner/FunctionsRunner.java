@@ -35,7 +35,8 @@ public final class FunctionsRunner {
         ExecutionUnit<Object> executionUnit = null;
 
         while (!executionUnits.isEmpty()) {
-            if (executionUnitOutput.getPostAction() == null) throw new UnsupportedOperationException();
+            if (executionUnitOutput.getPostAction() == null)
+                throw new UnsupportedOperationException("Unsupported Post Action");
             switch (executionUnitOutput.getPostAction()) {
                 case CONTINUE -> {
                     Class<? extends ExecutionUnit<?>> clazz = executionUnits.pop();
