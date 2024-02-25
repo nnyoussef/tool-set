@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static lu.nyo.functionrunner.enums.PostAction.CONTINUE;
 
-public class Test1 implements ExecutionUnit<String> {
+public class Test7 implements ExecutionUnit<String> {
 
     @Override
     public String adapt(Object data,
@@ -23,6 +23,7 @@ public class Test1 implements ExecutionUnit<String> {
                         ExecutionUnitOutput executionUnitOutput,
                         Map<String, Object> args) {
         Integer abc = input.length() * 10;
-        executionUnitOutput.setOutput(abc, CONTINUE, null);
+
+        executionUnitOutput.setOutput(abc, CONTINUE, Map.of("CLASS", Integer.class));
     }
 }

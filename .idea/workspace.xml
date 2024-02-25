@@ -11,7 +11,22 @@
     </loaded-modules>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="" />
+    <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="Adding Some Updates some predefined FunctionsRunners and factories">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/FunctionsRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/FunctionsRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/dto/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/ExecutionUnitOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/enums/PostAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/enums/PostAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/interfaces/ExecutionUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/interfaces/ExecutionUnit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/interfaces/FunctionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/interfaces/FunctionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/predefined/functionfactories/SBFunctionFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/FunctionsRunnerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/FunctionsRunnerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test1.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test1UnrecognizedPostAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test1UnrecognizedPostAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test2.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test2Stop.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test2Stop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test3.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-flux-starter/src/main/java/lu/nyo/webfluxstarter/DynamicRouterConfigs.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-flux-starter/src/main/java/lu/nyo/webfluxstarter/DynamicRouterConfigs.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -43,23 +58,32 @@
     "JUnit.FunctionChainerRunnerTest.executor": "Run",
     "JUnit.FunctionChainerRunnerTest.functionChaninerDefaultConstructorAccessTest.executor": "Run",
     "JUnit.FunctionChainerRunnerTest.test1.executor": "Run",
+    "JUnit.FunctionsRunnerTest.test4.executor": "Run",
+    "JUnit.FunctionsRunnerTest.test5.executor": "Run",
+    "JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException.executor": "Run",
     "JUnit.WebFluxTest.testContext.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.core [clean].executor": "Run",
     "Maven.core [compile].executor": "Run",
+    "Maven.core [install].executor": "Run",
+    "Maven.core [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
     "Maven.core [package].executor": "Run",
     "Maven.core [test].executor": "Run",
+    "Maven.core [verify].executor": "Run",
     "Maven.function-chainer [org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test].executor": "Run",
     "Maven.function-chainer [org.jacoco:jacoco-maven-plugin:0.7.7.201606060606:report].executor": "Run",
     "Maven.function-chainer [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
+    "Maven.function-runner [clean].executor": "Run",
+    "Maven.function-runner [install].executor": "Run",
+    "Maven.function-runner [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/nassi/AquaProjects/core/web-flux-starter/src/main",
+    "last_opened_file_path": "C:/Users/nassi/AquaProjects/appdeployer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -76,13 +100,17 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\nassi\AquaProjects\core\web-flux-starter\src\main" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="lu.nyo.functionrunner" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lu.nyo.functionrunner.functions" />
+      <recent name="lu.nyo.functionrunner.predefined.executionunits" />
       <recent name="lu.nyo.functionchainer.fs" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException">
     <configuration name="FunctionsRunnerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="function-chainer" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="lu.nyo.functionrunner.interfaces.*" />
@@ -91,6 +119,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
       <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -100,7 +129,7 @@
       <module name="function-chainer" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lu.nyo.functionrunner.*" />
+          <option name="PATTERN" value="lu.nyo.functionrunner.interfaces.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -112,33 +141,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FunctionsRunnerTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="function-chainer" />
+    <configuration name="FunctionsRunnerTest.test4" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="function-runner" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lu.nyo.functionrunner.interfaces.*" />
+          <option name="PATTERN" value="lu.nyo.functionrunner.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
       <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
-      <option name="METHOD_NAME" value="test1" />
+      <option name="METHOD_NAME" value="test4" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WebFluxTest.testContext" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="web-flux-starter" />
+    <configuration name="FunctionsRunnerTest.test5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="function-runner" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lu.nyo.webfluxstarter.*" />
+          <option name="PATTERN" value="lu.nyo.functionrunner.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lu.nyo.webfluxstarter" />
-      <option name="MAIN_CLASS_NAME" value="lu.nyo.webfluxstarter.WebFluxTest" />
-      <option name="METHOD_NAME" value="testContext" />
+      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
+      <option name="METHOD_NAME" value="test5" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FunctionsRunnerTest.testExecutionUnitFunctionSelectorException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="function-runner" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lu.nyo.functionrunner.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
+      <option name="METHOD_NAME" value="testExecutionUnitFunctionSelectorException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -159,10 +204,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException" />
+        <item itemvalue="JUnit.FunctionsRunnerTest.test5" />
+        <item itemvalue="JUnit.FunctionsRunnerTest.test4" />
         <item itemvalue="JUnit.FunctionsRunnerTest" />
         <item itemvalue="JUnit.FunctionsRunnerTest.functionChaninerDefaultConstructorAccessTest" />
-        <item itemvalue="JUnit.WebFluxTest.testContext" />
-        <item itemvalue="JUnit.FunctionsRunnerTest.test1" />
       </list>
     </recent_temporary>
   </component>
@@ -182,11 +228,31 @@
       <workItem from="1708219779667" duration="660000" />
       <workItem from="1708220446296" duration="201000" />
       <workItem from="1708220846187" duration="901000" />
-      <workItem from="1708224932439" duration="22203000" />
+      <workItem from="1708224932439" duration="22922000" />
+      <workItem from="1708307038253" duration="34000" />
+      <workItem from="1708307211191" duration="3960000" />
+      <workItem from="1708392540388" duration="3147000" />
+      <workItem from="1708467849089" duration="657000" />
+      <workItem from="1708473758203" duration="599000" />
+      <workItem from="1708700610684" duration="2925000" />
+      <workItem from="1708859996050" duration="18836000" />
     </task>
+    <task id="LOCAL-00001" summary="Adding Some Updates some predefined FunctionsRunners and factories">
+      <option name="closed" value="true" />
+      <created>1708467911553</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708467911553</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Adding Some Updates some predefined FunctionsRunners and factories" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Some Updates some predefined FunctionsRunners and factories" />
   </component>
 </project>

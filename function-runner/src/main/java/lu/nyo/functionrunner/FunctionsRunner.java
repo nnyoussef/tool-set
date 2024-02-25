@@ -1,55 +1,55 @@
 package lu.nyo.functionrunner;
 
-import lu.nyo.functionrunner.dto.State;
+import lu.nyo.functionrunner.enums.PostAction;
 import lu.nyo.functionrunner.interfaces.Context;
 import lu.nyo.functionrunner.interfaces.ExecutionUnit;
-import lu.nyo.functionrunner.interfaces.FunctionFactory;
 
 import java.util.LinkedList;
+import java.util.Map;
 
 import static java.util.Optional.ofNullable;
 
 public final class FunctionsRunner {
 
-    private final FunctionFactory functionFactory;
+    private final Context context;
 
     private FunctionsRunner() throws IllegalAccessException {
         throw new IllegalAccessException("");
     }
 
-    private FunctionsRunner(FunctionFactory functionFactory) {
-        this.functionFactory = functionFactory;
+    private FunctionsRunner(Context context) {
+        this.context = context;
     }
 
-    public static FunctionsRunner create(FunctionFactory functionFactory) {
-        return new FunctionsRunner(functionFactory);
+    public static FunctionsRunner create(Context context) {
+        return new FunctionsRunner(context);
     }
 
     public <T> T runWithResult(Object firstInput,
                                T defaultIfNull,
-                               Context context,
                                LinkedList<Class<? extends ExecutionUnit<?>>> executionUnits) {
 
-        State state = new State();
+        ExecutionUnitOutput executionUnitOutput = new ExecutionUnitOutput();
+        executionUnitOutput.setOutput(firstInput, PostAction.CONTINUE, Map.of());
 
-        ExecutionUnit<Object> executionUnit = functionFactory.create(executionUnits.pop());
-
-        executionUnit.execute(executionUnit.adapt(firstInput, context), state, context);
+        ExecutionUnit<Object> executionUnit = null;
 
         while (!executionUnits.isEmpty()) {
-            if (state.getPostAction() == null)
-                throw new UnsupportedOperationException();
-            switch (state.getPostAction()) {
+            if (executionUnitOutput.getPostAction() == null) throw new UnsupportedOperationException();
+            switch (executionUnitOutput.getPostAction()) {
                 case CONTINUE -> {
                     Class<? extends ExecutionUnit<?>> clazz = executionUnits.pop();
-                    executionUnit = functionFactory.create(clazz);
-                    executionUnit.execute(executionUnit.adapt(state.getResultToTransfer(), context), state, context);
+                    executionUnit = (ExecutionUnit<Object>) context.getFunctionFactory().get(clazz);
+                    executionUnit.execute(executionUnit.adapt(executionUnitOutput.getResultToTransfer(), context, executionUnitOutput.getNextStepArgs()), context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
+                    if (executionUnitOutput.getPostAction() == PostAction.REPEAT)
+                        executionUnits.push(clazz);
+                }
+                case REPEAT -> {
+                    executionUnit.execute(executionUnit.adapt(executionUnitOutput.getResultToTransfer(), context, executionUnitOutput.getNextStepArgs()), context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
                 }
                 default -> executionUnits.clear();
             }
-
         }
-
-        return ofNullable(state.getResultToTransfer()).map(d -> ((T) d)).orElse(defaultIfNull);
+        return ofNullable(executionUnitOutput.getResultToTransfer()).map(d -> ((T) d)).orElse(defaultIfNull);
     }
 }

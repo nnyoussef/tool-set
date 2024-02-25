@@ -55,37 +55,37 @@ public class DynamicRouterConfigs {
         HashMap<String, HandlerFunction> functionsMap = getHandlerFunctionsFromServiceProvider();
         RouterFunctions.Builder builder = RouterFunctions.route();
         builder.GET("/api/**", accept(MediaType.ALL), serverRequest -> {
-            String url = serverRequest.path().replaceFirst("/api", "");
+            String url = serverRequest.path().substring(4);
             String handlerClassName = routerConfiguration.get("GET").get(url);
             return functionsMap.get(handlerClassName).handle(serverRequest);
         });
         builder.POST("/api/**", accept(MediaType.ALL), serverRequest -> {
-            String url = serverRequest.path().replaceFirst("/api", "");
+            String url = serverRequest.path().substring(4);
             String handlerClassName = routerConfiguration.get("POST").get(url);
             return functionsMap.get(handlerClassName).handle(serverRequest);
         });
         builder.PUT("/api/**", accept(MediaType.ALL), serverRequest -> {
-            String url = serverRequest.path().replaceFirst("/api", "");
+            String url = serverRequest.path().substring(4);
             String handlerClassName = routerConfiguration.get("PUT").get(url);
             return functionsMap.get(handlerClassName).handle(serverRequest);
         });
         builder.DELETE("/api/**", accept(MediaType.ALL), serverRequest -> {
-            String url = serverRequest.path().replaceFirst("/api", "");
+            String url = serverRequest.path().substring(4);
             String handlerClassName = routerConfiguration.get("DELETE").get(url);
             return functionsMap.get(handlerClassName).handle(serverRequest);
         });
         builder.HEAD("/api/**", accept(MediaType.ALL), serverRequest -> {
-            String url = serverRequest.path().replaceFirst("/api", "");
+            String url = serverRequest.path().substring(4);
             String handlerClassName = routerConfiguration.get("HEAD").get(url);
             return functionsMap.get(handlerClassName).handle(serverRequest);
         });
         builder.OPTIONS("/api/**", accept(MediaType.ALL), serverRequest -> {
-            String url = serverRequest.path().replaceFirst("/api", "");
+            String url = serverRequest.path().substring(4);
             String handlerClassName = routerConfiguration.get("OPTIONS").get(url);
             return functionsMap.get(handlerClassName).handle(serverRequest);
         });
         builder.PATCH("/api/**", accept(MediaType.ALL), serverRequest -> {
-            String url = serverRequest.path().replaceFirst("/api", "");
+            String url = serverRequest.path().substring(4);
             String handlerClassName = routerConfiguration.get("PATCH").get(url);
             return functionsMap.get(handlerClassName).handle(serverRequest);
         });
