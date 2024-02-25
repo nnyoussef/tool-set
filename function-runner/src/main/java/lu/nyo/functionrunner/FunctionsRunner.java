@@ -41,12 +41,19 @@ public final class FunctionsRunner {
                 case CONTINUE -> {
                     Class<? extends ExecutionUnit<?>> clazz = executionUnits.pop();
                     executionUnit = (ExecutionUnit<Object>) context.getFunctionFactory().get(clazz);
-                    executionUnit.execute(executionUnit.adapt(executionUnitOutput.getResultToTransfer(), context, executionUnitOutput.getNextStepArgs()), context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
+
+                    Object outputResults = executionUnitOutput.getResultToTransfer();
+                    Object adaptedObject = executionUnit.adapt(outputResults, context, executionUnitOutput.getNextStepArgs());
+
+                    executionUnit.execute(adaptedObject, context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
                     if (executionUnitOutput.getPostAction() == PostAction.REPEAT)
                         executionUnits.push(clazz);
                 }
                 case REPEAT -> {
-                    executionUnit.execute(executionUnit.adapt(executionUnitOutput.getResultToTransfer(), context, executionUnitOutput.getNextStepArgs()), context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
+                    Object outputResults = executionUnitOutput.getResultToTransfer();
+                    Object adaptedObject = executionUnit.adapt(outputResults, context, executionUnitOutput.getNextStepArgs());
+
+                    executionUnit.execute(adaptedObject, context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
                 }
                 default -> executionUnits.clear();
             }

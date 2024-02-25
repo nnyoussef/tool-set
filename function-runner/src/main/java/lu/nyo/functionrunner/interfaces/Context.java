@@ -1,6 +1,6 @@
 package lu.nyo.functionrunner.interfaces;
 
-public abstract class Context {
+public interface Context {
 
-    public abstract FunctionFactory getFunctionFactory();
+    FunctionFactory getFunctionFactory();
 }

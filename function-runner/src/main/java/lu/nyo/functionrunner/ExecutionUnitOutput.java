@@ -10,9 +10,6 @@ public class ExecutionUnitOutput {
     private PostAction postAction;
     private Map<String, Object> nextStepArgs;
 
-    public ExecutionUnitOutput() {
-    }
-
     public void setOutput(Object resultToTransfer,
                           PostAction postAction,
                           Map<String, Object> nextStepArgs) {

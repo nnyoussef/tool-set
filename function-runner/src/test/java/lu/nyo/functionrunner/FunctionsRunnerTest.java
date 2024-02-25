@@ -141,19 +141,19 @@ public class FunctionsRunnerTest {
         }};
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            functionsRunner.runWithResult("asdsa", 0, functionChain1);
+            functionsRunner.runWithResult("test", 0, functionChain1);
         });
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            functionsRunner.runWithResult("asdsa", 0, functionChain2);
+            functionsRunner.runWithResult("test", 0, functionChain2);
         });
 
         Assertions.assertThrows(UnsupportedOperationException.class, () -> {
-            functionsRunner.runWithResult("asdsa", 0, functionChain3);
+            functionsRunner.runWithResult("test", 0, functionChain3);
         });
 
         Assertions.assertThrows(UnsupportedOperationException.class, () -> {
-            functionsRunner.runWithResult("asdsa", 0, functionChain4);
+            functionsRunner.runWithResult("test", 0, functionChain4);
         });
     }
 
