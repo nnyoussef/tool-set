@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import static java.util.Optional.ofNullable;
+import static lu.nyo.functionrunner.enums.PostAction.REPEAT;
 
 public final class FunctionsRunner {
 
@@ -46,7 +47,7 @@ public final class FunctionsRunner {
                     Object adaptedObject = executionUnit.adapt(outputResults, context, executionUnitOutput.getNextStepArgs());
 
                     executionUnit.execute(adaptedObject, context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
-                    if (executionUnitOutput.getPostAction() == PostAction.REPEAT)
+                    if (executionUnitOutput.getPostAction() == REPEAT)
                         executionUnits.push(clazz);
                 }
                 case REPEAT -> {
@@ -60,4 +61,5 @@ public final class FunctionsRunner {
         }
         return ofNullable(executionUnitOutput.getResultToTransfer()).map(d -> ((T) d)).orElse(defaultIfNull);
     }
+
 }
