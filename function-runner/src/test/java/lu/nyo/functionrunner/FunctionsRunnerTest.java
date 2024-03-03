@@ -16,13 +16,13 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import static java.util.Map.of;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FunctionsRunnerTest {
     class TestFunctionFactory extends FunctionFactory {
         @Override
-        public <T extends ExecutionUnit> T get(Class<? extends ExecutionUnit> tClass) {
+        public <T extends ExecutionUnit> T resolve(Class<? extends ExecutionUnit> tClass) {
             Map<Class, T> inits = new HashMap<>() {{
                 put(Test1.class, (T) new Test1());
                 put(Test1UnrecognizedPostAction.class, (T) new Test1UnrecognizedPostAction());
@@ -33,8 +33,10 @@ public class FunctionsRunnerTest {
                 put(Test5.class, (T) new Test5());
                 put(Test6.class, (T) new Test6());
                 put(Test7.class, (T) new Test7());
+                put(Test9.class, (T) new Test9());
+                put(Test9Fallback.class, (T) new Test9Fallback());
             }};
-            return inits.getOrDefault(tClass, null);
+            return inits.get(tClass);
         }
     }
 
@@ -69,7 +71,7 @@ public class FunctionsRunnerTest {
 
         Integer a = functionsRunner.runWithResult(DATA,
                 0,
-                classLinkedHashMap);
+                classLinkedHashMap, null);
 
         Assertions.assertEquals(a, 0);
     }
@@ -85,7 +87,7 @@ public class FunctionsRunnerTest {
 
         Integer a = functionsRunner.runWithResult(DATA,
                 0,
-                classLinkedHashMap);
+                classLinkedHashMap, null);
 
         Assertions.assertEquals(a, 0);
     }
@@ -98,7 +100,7 @@ public class FunctionsRunnerTest {
             add(Test2.class);
         }};
 
-        assertThrowsExactly(UnsupportedOperationException.class, () -> functionsRunner.runWithResult(DATA, 0, classLinkedHashMap));
+        assertThrowsExactly(UnsupportedOperationException.class, () -> functionsRunner.runWithResult(DATA, 0, classLinkedHashMap, null));
     }
 
     @Test
@@ -106,8 +108,49 @@ public class FunctionsRunnerTest {
         LinkedList<Class<? extends ExecutionUnit<?>>> classLinkedHashMap = new LinkedList<>() {{
             add(Test4.class);
         }};
-        Assertions.assertEquals(functionsRunner.runWithResult(0, 0, classLinkedHashMap), 4);
+        Assertions.assertEquals(functionsRunner.runWithResult(0, 0, classLinkedHashMap, null), 4);
     }
 
+    @Test
+    public void test5() {
+        LinkedList<Class<? extends ExecutionUnit<?>>> classLinkedHashMap = new LinkedList<>() {{
+            add(Test9.class);
+        }};
+        FunctionRunnerException functionRunnerException = Assertions.assertThrows(FunctionRunnerException.class, () -> {
+            functionsRunner.runWithResult("test", 0, classLinkedHashMap, Test9Fallback.class);
+        });
+
+        assertEquals(functionRunnerException.getCause().getMessage(), "this is a test fallback");
+        assertEquals(functionRunnerException.getContext(), context);
+        assertEquals(functionRunnerException.getDataResult(), "the input cannot be reperared");
+        assertTrue(functionRunnerException.getNextStepArgs().get("test").equals("test"));
+    }
+
+    @Test
+    public void test6() {
+        LinkedList<Class<? extends ExecutionUnit<?>>> classLinkedHashMap = new LinkedList<>() {{
+            add(Test9.class);
+        }};
+        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> {
+            functionsRunner.runWithResult("test", 0, classLinkedHashMap, Test10Fallback.class);
+        });
+
+        assertTrue(runtimeException.getCause() instanceof ClassNotFoundException);
+
+        assertEquals(runtimeException.getCause().getMessage(), "Class couldn't be resolved");
+    }
+
+    @Test
+    public void test7() {
+        LinkedList<Class<? extends ExecutionUnit<?>>> classLinkedHashMap = new LinkedList<>() {{
+            add(Test8.class);
+        }};
+        FunctionRunnerException functionRunnerException = Assertions.assertThrows(FunctionRunnerException.class, () -> {
+            functionsRunner.runWithResult("test", 0, classLinkedHashMap, Test9Fallback.class);
+        });
+
+        assertTrue(functionRunnerException.getExceptionToHandle() instanceof ClassNotFoundException);
+        assertEquals(functionRunnerException.getExceptionToHandle().getMessage(), "Class couldn't be resolved");
+    }
 
 }

@@ -1,5 +1,6 @@
 package lu.nyo.functionrunner.functions;
 
+import com.google.common.collect.ImmutableMap;
 import lu.nyo.functionrunner.ExecutionUnitOutput;
 import lu.nyo.functionrunner.interfaces.Context;
 import lu.nyo.functionrunner.interfaces.ExecutionUnit;
@@ -14,7 +15,7 @@ public class Test2 implements ExecutionUnit<Integer> {
     public void execute(Integer input,
                         Context context,
                         ExecutionUnitOutput executionUnitOutput,
-                        Map<String, Object> args) {
+                        ImmutableMap<String, Object> args) {
         executionUnitOutput.setOutput(input * 0, CONTINUE, null);
     }
 

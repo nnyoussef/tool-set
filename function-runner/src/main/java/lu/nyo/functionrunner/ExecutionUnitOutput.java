@@ -1,21 +1,21 @@
 package lu.nyo.functionrunner;
 
+import com.google.common.collect.ImmutableMap;
 import lu.nyo.functionrunner.enums.PostAction;
 
-import java.util.Map;
 import java.util.Optional;
 
 public class ExecutionUnitOutput {
     private Object resultToTransfer;
     private PostAction postAction;
-    private Map<String, Object> nextStepArgs;
+    private ImmutableMap<String, Object> nextStepArgs;
 
     public void setOutput(Object resultToTransfer,
                           PostAction postAction,
-                          Map<String, Object> nextStepArgs) {
+                          ImmutableMap<String, Object> nextStepArgs) {
         this.resultToTransfer = resultToTransfer;
         this.postAction = postAction;
-        this.nextStepArgs = Optional.ofNullable(nextStepArgs).orElse(Map.of());
+        this.nextStepArgs = Optional.ofNullable(nextStepArgs).orElse(ImmutableMap.of());
     }
 
     Object getResultToTransfer() {
@@ -26,7 +26,7 @@ public class ExecutionUnitOutput {
         return postAction;
     }
 
-    Map<String, Object> getNextStepArgs() {
+    ImmutableMap<String, Object> getNextStepArgs() {
         return nextStepArgs;
     }
 

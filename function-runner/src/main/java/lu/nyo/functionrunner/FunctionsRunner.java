@@ -1,11 +1,11 @@
 package lu.nyo.functionrunner;
 
+import com.google.common.collect.ImmutableMap;
 import lu.nyo.functionrunner.enums.PostAction;
 import lu.nyo.functionrunner.interfaces.Context;
 import lu.nyo.functionrunner.interfaces.ExecutionUnit;
 
 import java.util.LinkedList;
-import java.util.Map;
 
 import static java.util.Optional.ofNullable;
 import static lu.nyo.functionrunner.enums.PostAction.REPEAT;
@@ -26,40 +26,64 @@ public final class FunctionsRunner {
         return new FunctionsRunner(context);
     }
 
-    public <T> T runWithResult(Object firstInput,
-                               T defaultIfNull,
-                               LinkedList<Class<? extends ExecutionUnit<?>>> executionUnits) {
+    public <T> T runWithResult(final Object firstInput,
+                               final T defaultIfNull,
+                               final LinkedList<Class<? extends ExecutionUnit<?>>> executionUnitChain,
+                               final Class<? extends ExecutionUnit<FunctionRunnerException>> fallback) {
 
         ExecutionUnitOutput executionUnitOutput = new ExecutionUnitOutput();
-        executionUnitOutput.setOutput(firstInput, PostAction.CONTINUE, Map.of());
+        executionUnitOutput.setOutput(firstInput, PostAction.CONTINUE, ImmutableMap.of());
 
         ExecutionUnit<Object> executionUnit = null;
 
-        while (!executionUnits.isEmpty()) {
-            if (executionUnitOutput.getPostAction() == null)
-                throw new UnsupportedOperationException("Unsupported Post Action");
-            switch (executionUnitOutput.getPostAction()) {
-                case CONTINUE -> {
-                    Class<? extends ExecutionUnit<?>> clazz = executionUnits.pop();
-                    executionUnit = (ExecutionUnit<Object>) context.getFunctionFactory().get(clazz);
-
-                    Object outputResults = executionUnitOutput.getResultToTransfer();
-                    Object adaptedObject = executionUnit.adapt(outputResults, context, executionUnitOutput.getNextStepArgs());
-
-                    executionUnit.execute(adaptedObject, context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
-                    if (executionUnitOutput.getPostAction() == REPEAT)
-                        executionUnits.push(clazz);
+        try {
+            while (!executionUnitChain.isEmpty()) {
+                checkIfValidPostAction(executionUnitOutput);
+                switch (executionUnitOutput.getPostAction()) {
+                    case CONTINUE -> {
+                        Class<? extends ExecutionUnit<?>> clazz = executionUnitChain.pop();
+                        executionUnit = (ExecutionUnit<Object>) context.getFunctionFactory().get(clazz);
+                        runFunction(executionUnitOutput, executionUnit);
+                        if (executionUnitOutput.getPostAction() == REPEAT)
+                            executionUnitChain.push(clazz);
+                    }
+                    case REPEAT -> runFunction(executionUnitOutput, executionUnit);
+                    default -> executionUnitChain.clear();
                 }
-                case REPEAT -> {
-                    Object outputResults = executionUnitOutput.getResultToTransfer();
-                    Object adaptedObject = executionUnit.adapt(outputResults, context, executionUnitOutput.getNextStepArgs());
-
-                    executionUnit.execute(adaptedObject, context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
-                }
-                default -> executionUnits.clear();
+            }
+            return ofNullable(executionUnitOutput.getResultToTransfer()).map(d -> ((T) d)).orElse(defaultIfNull);
+        } catch (Exception e) {
+            try {
+                throw getExceptionToThrow(e, executionUnitOutput, fallback, context);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
             }
         }
-        return ofNullable(executionUnitOutput.getResultToTransfer()).map(d -> ((T) d)).orElse(defaultIfNull);
     }
 
+    private void runFunction(ExecutionUnitOutput executionUnitOutput,
+                             ExecutionUnit<Object> executionUnit) {
+        Object outputResults = executionUnitOutput.getResultToTransfer();
+        Object adaptedObject = executionUnit.adapt(outputResults, context, executionUnitOutput.getNextStepArgs());
+        executionUnit.execute(adaptedObject, context, executionUnitOutput, executionUnitOutput.getNextStepArgs());
+    }
+
+    private void checkIfValidPostAction(ExecutionUnitOutput executionUnitOutput) {
+        if (executionUnitOutput.getPostAction() == null)
+            throw new UnsupportedOperationException("Unsupported Post Action");
+    }
+
+    private RuntimeException getExceptionToThrow(Exception e,
+                                                 ExecutionUnitOutput executionUnitOutput,
+                                                 Class<? extends ExecutionUnit<FunctionRunnerException>> fallback,
+                                                 Context context) throws ClassNotFoundException {
+        if (e instanceof UnsupportedOperationException)
+            return (UnsupportedOperationException) e;
+        Object outputResults = executionUnitOutput.getResultToTransfer();
+        ImmutableMap<String, Object> nextStepArgs = executionUnitOutput.getNextStepArgs();
+        FunctionRunnerException functionRunnerException = new FunctionRunnerException(outputResults, nextStepArgs, context, e);
+        context.getFunctionFactory().get(fallback).execute(functionRunnerException, context, null, null);
+        return functionRunnerException;
+
+    }
 }
