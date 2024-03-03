@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 public class FunctionsRunnerTest {
     class TestFunctionFactory extends FunctionFactory {
         @Override
-        public <T extends ExecutionUnit> T create(Class<? extends ExecutionUnit> tClass) {
+        public <T extends ExecutionUnit> T get(Class<? extends ExecutionUnit> tClass) {
             Map<Class, T> inits = new HashMap<>() {{
                 put(Test1.class, (T) new Test1());
                 put(Test1UnrecognizedPostAction.class, (T) new Test1UnrecognizedPostAction());
