@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FunctionsRunnerTest {
     class TestFunctionFactory extends FunctionFactory {
         @Override
-        public <T extends ExecutionUnit> T resolve(Class<? extends ExecutionUnit> tClass) {
+        protected <T extends ExecutionUnit> T resolve(Class<? extends ExecutionUnit> tClass) {
             Map<Class, T> inits = new HashMap<>() {{
                 put(Test1.class, (T) new Test1());
                 put(Test1UnrecognizedPostAction.class, (T) new Test1UnrecognizedPostAction());
@@ -40,12 +40,7 @@ public class FunctionsRunnerTest {
         }
     }
 
-    Context context = new Context() {
-        @Override
-        public FunctionFactory getFunctionFactory() {
-            return new TestFunctionFactory();
-        }
-    };
+    Context context = () -> new TestFunctionFactory();
 
     private static final Map<String, String> DATA = of("abc", "123");
 
@@ -58,7 +53,7 @@ public class FunctionsRunnerTest {
         try {
             constructor.newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            Assertions.assertEquals(e.getCause().getClass(), IllegalAccessException.class);
+            assertEquals(e.getCause().getClass(), IllegalAccessException.class);
         }
     }
 
@@ -73,7 +68,7 @@ public class FunctionsRunnerTest {
                 0,
                 classLinkedHashMap, null);
 
-        Assertions.assertEquals(a, 0);
+        assertEquals(a, 0);
     }
 
     @Test
@@ -89,7 +84,7 @@ public class FunctionsRunnerTest {
                 0,
                 classLinkedHashMap, null);
 
-        Assertions.assertEquals(a, 0);
+        assertEquals(a, 0);
     }
 
     @Test
@@ -108,7 +103,7 @@ public class FunctionsRunnerTest {
         LinkedList<Class<? extends ExecutionUnit<?>>> classLinkedHashMap = new LinkedList<>() {{
             add(Test4.class);
         }};
-        Assertions.assertEquals(functionsRunner.runWithResult(0, 0, classLinkedHashMap, null), 4);
+        assertEquals(functionsRunner.runWithResult(0, 0, classLinkedHashMap, null), 4);
     }
 
     @Test
@@ -137,7 +132,7 @@ public class FunctionsRunnerTest {
 
         assertTrue(runtimeException.getCause() instanceof ClassNotFoundException);
 
-        assertEquals(runtimeException.getCause().getMessage(), "Class couldn't be resolved");
+        assertEquals(runtimeException.getCause().getMessage(), "lu.nyo.functionrunner.FunctionsRunnerTest.TestFunctionFactory Cannot resolve lu.nyo.functionrunner.functions.Test10Fallback");
     }
 
     @Test
@@ -150,7 +145,7 @@ public class FunctionsRunnerTest {
         });
 
         assertTrue(functionRunnerException.getExceptionToHandle() instanceof ClassNotFoundException);
-        assertEquals(functionRunnerException.getExceptionToHandle().getMessage(), "Class couldn't be resolved");
+        assertEquals(functionRunnerException.getExceptionToHandle().getMessage(), "lu.nyo.functionrunner.FunctionsRunnerTest.TestFunctionFactory Cannot resolve lu.nyo.functionrunner.functions.Test8");
     }
 
 }
