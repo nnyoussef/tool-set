@@ -8,7 +8,6 @@ import lu.nyo.functionrunner.interfaces.ExecutionUnit;
 import java.util.LinkedList;
 
 import static java.util.Optional.ofNullable;
-import static lu.nyo.functionrunner.enums.PostAction.REPEAT;
 
 public final class FunctionsRunner {
 
