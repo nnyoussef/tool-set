@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import static java.util.Map.of;
+import static lu.nyo.functionrunner.FunctionsRunner.create;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,7 +30,6 @@ public class FunctionsRunnerTest {
                 put(Test2.class, (T) new Test2());
                 put(Test2Stop.class, (T) new Test2Stop());
                 put(Test3.class, (T) new Test3());
-                put(Test4.class, (T) new Test4());
                 put(Test5.class, (T) new Test5());
                 put(Test6.class, (T) new Test6());
                 put(Test7.class, (T) new Test7());
@@ -44,7 +44,7 @@ public class FunctionsRunnerTest {
 
     private static final Map<String, String> DATA = of("abc", "123");
 
-    FunctionsRunner functionsRunner = FunctionsRunner.create(context);
+    FunctionsRunner functionsRunner = create(context);
 
     @Test
     public void functionRunnerDefaultConstructorAccessTest() {
@@ -64,9 +64,7 @@ public class FunctionsRunnerTest {
             add(Test2.class);
         }};
 
-        Integer a = functionsRunner.runWithResult(DATA,
-                0,
-                classLinkedHashMap, null);
+        Integer a = functionsRunner.runWithResult(DATA, 0, classLinkedHashMap, null);
 
         assertEquals(a, 0);
     }
@@ -98,13 +96,6 @@ public class FunctionsRunnerTest {
         assertThrowsExactly(UnsupportedOperationException.class, () -> functionsRunner.runWithResult(DATA, 0, classLinkedHashMap, null));
     }
 
-    @Test
-    public void test4() {
-        LinkedList<Class<? extends ExecutionUnit<?>>> classLinkedHashMap = new LinkedList<>() {{
-            add(Test4.class);
-        }};
-        assertEquals(functionsRunner.runWithResult(0, 0, classLinkedHashMap, null), 4);
-    }
 
     @Test
     public void test5() {
@@ -147,5 +138,6 @@ public class FunctionsRunnerTest {
         assertTrue(functionRunnerException.getExceptionToHandle() instanceof ClassNotFoundException);
         assertEquals(functionRunnerException.getExceptionToHandle().getMessage(), "lu.nyo.functionrunner.FunctionsRunnerTest.TestFunctionFactory Cannot resolve lu.nyo.functionrunner.functions.Test8");
     }
+
 
 }

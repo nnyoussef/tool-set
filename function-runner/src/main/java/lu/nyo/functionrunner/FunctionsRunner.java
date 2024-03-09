@@ -44,10 +44,7 @@ public final class FunctionsRunner {
                         Class<? extends ExecutionUnit<?>> clazz = executionUnitChain.pop();
                         executionUnit = (ExecutionUnit<Object>) context.getFunctionFactory().get(clazz);
                         runFunction(executionUnitOutput, executionUnit);
-                        if (executionUnitOutput.getPostAction() == REPEAT)
-                            executionUnitChain.push(clazz);
                     }
-                    case REPEAT -> runFunction(executionUnitOutput, executionUnit);
                     default -> executionUnitChain.clear();
                 }
             }
