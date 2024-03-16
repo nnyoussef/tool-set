@@ -4,15 +4,15 @@
            plugins) {
     return {
         server: {
-            port: 8987
+            port: 6969
         },
         A: 12,
         B: {
             C: 'D12231',
-            E: ['F', 'G'],
+            E: '[F, G]',
             H: {
                 I: {
-                    J: plugins.getData.apply('Hello from application.js')
+                    J: plugins.getData1.apply('Hello from application.js')
                 }
             }
         }

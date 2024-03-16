@@ -1,20 +1,20 @@
 package lu.nyo.functionrunner;
 
 import com.google.common.collect.ImmutableMap;
-import lu.nyo.functionrunner.enums.PostAction;
 import lu.nyo.functionrunner.interfaces.Context;
 import lu.nyo.functionrunner.interfaces.ExecutionUnit;
 
-import java.util.LinkedList;
-
+import static com.google.common.collect.ImmutableMap.of;
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
+import static lu.nyo.functionrunner.enums.PostAction.CONTINUE;
 
 public final class FunctionsRunner {
 
     private final Context context;
 
     private FunctionsRunner() throws IllegalAccessException {
-        throw new IllegalAccessException("");
+        throw new IllegalAccessException();
     }
 
     private FunctionsRunner(Context context) {
@@ -27,24 +27,23 @@ public final class FunctionsRunner {
 
     public <T> T runWithResult(final Object firstInput,
                                final T defaultIfNull,
-                               final LinkedList<Class<? extends ExecutionUnit<?>>> executionUnitChain,
-                               final Class<? extends ExecutionUnit<FunctionRunnerException>> fallback) {
+                               final Class<? extends ExecutionUnit<FunctionRunnerException>> fallback,
+                               final Class<? extends ExecutionUnit<?>>... executionUnitChain) {
 
         ExecutionUnitOutput executionUnitOutput = new ExecutionUnitOutput();
-        executionUnitOutput.setOutput(firstInput, PostAction.CONTINUE, ImmutableMap.of());
+        executionUnitOutput.setOutput(firstInput, CONTINUE, of());
 
-        ExecutionUnit<Object> executionUnit = null;
+        ExecutionUnit<Object> executionUnit;
+
 
         try {
-            while (!executionUnitChain.isEmpty()) {
+            for (Class<? extends ExecutionUnit<?>> clazz : executionUnitChain) {
                 checkIfValidPostAction(executionUnitOutput);
-                switch (executionUnitOutput.getPostAction()) {
-                    case CONTINUE -> {
-                        Class<? extends ExecutionUnit<?>> clazz = executionUnitChain.pop();
-                        executionUnit = (ExecutionUnit<Object>) context.getFunctionFactory().get(clazz);
-                        runFunction(executionUnitOutput, executionUnit);
-                    }
-                    default -> executionUnitChain.clear();
+                if (requireNonNull(executionUnitOutput.getPostAction()) == CONTINUE) {
+                    executionUnit = (ExecutionUnit<Object>) context.getFunctionFactory().get(clazz);
+                    runFunction(executionUnitOutput, executionUnit);
+                } else {
+                    break;
                 }
             }
             return ofNullable(executionUnitOutput.getResultToTransfer()).map(d -> ((T) d)).orElse(defaultIfNull);
@@ -55,6 +54,7 @@ public final class FunctionsRunner {
                 throw new RuntimeException(ex);
             }
         }
+
     }
 
     private void runFunction(ExecutionUnitOutput executionUnitOutput,
@@ -82,4 +82,5 @@ public final class FunctionsRunner {
         return functionRunnerException;
 
     }
+
 }

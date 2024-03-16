@@ -1,6 +1,5 @@
 package lu.nyo.sbjsconfig;
 
-import lu.nyo.utils.ExtraMapUtils;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.TypeLiteral;
@@ -19,6 +18,7 @@ import static java.util.ServiceLoader.load;
 import static java.util.stream.Collectors.toMap;
 import static lu.nyo.sbjsconfig.JsPropertiesImporter.JsPropertiesImporterException.ERROR_CODE.FILE_NOT_FOUND;
 import static lu.nyo.sbjsconfig.JsPropertiesImporter.JsPropertiesImporterException.ERROR_CODE.SCRIPT_EXECUTION_ERROR;
+import static lu.nyo.utils.ExtraMapUtils.flatten;
 import static org.graalvm.polyglot.Source.newBuilder;
 
 public final class JsPropertiesImporter implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
@@ -36,7 +36,6 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
             }
 
         }
-
 
         public JsPropertiesImporterException(ERROR_CODE errorCode, Throwable cause) {
             super(errorCode.message, cause);
@@ -69,7 +68,7 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
         try {
             Map<String, Object> userDefinedConfiguration = runScript(context, source, environmentPreparedEvent);
 
-            Map<String, String> flattenedMap = ExtraMapUtils.flatten(userDefinedConfiguration, Object::toString);
+            Map<String, String> flattenedMap = flatten(userDefinedConfiguration, Object::toString);
 
             Properties properties = new Properties();
             flattenedMap.forEach(properties::setProperty);
@@ -100,7 +99,8 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
     }
 
     private static URL getApplicationJsFileUrl(ApplicationEnvironmentPreparedEvent environmentPreparedEvent) {
-        return environmentPreparedEvent.getSource()
+        return environmentPreparedEvent
+                .getSource()
                 .getClass()
                 .getClassLoader()
                 .getResource(APPLICATION_PROPERTIES_FILE_NAME);
