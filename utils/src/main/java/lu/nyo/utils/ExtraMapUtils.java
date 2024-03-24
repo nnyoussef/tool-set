@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import static java.lang.String.format;
-
 public class ExtraMapUtils {
 
     private ExtraMapUtils() throws IllegalAccessException {
@@ -27,7 +25,7 @@ public class ExtraMapUtils {
         for (Map.Entry<String, Object> entry : source.entrySet()) {
             String k = entry.getKey();
             Object v = entry.getValue();
-            String nestedKey = format("%s.%s", key, k);
+            String nestedKey = key.concat(".").concat("k");
             if (v instanceof Map) {
                 flatten((Map<String, Object>) v, result, nestedKey, transformValues);
             } else {

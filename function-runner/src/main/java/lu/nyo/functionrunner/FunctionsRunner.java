@@ -35,7 +35,6 @@ public final class FunctionsRunner {
 
         ExecutionUnit<Object> executionUnit;
 
-
         try {
             for (Class<? extends ExecutionUnit<?>> clazz : executionUnitChain) {
                 checkIfValidPostAction(executionUnitOutput);

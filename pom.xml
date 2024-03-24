@@ -13,10 +13,13 @@
     </properties>
     <modules>
         <module>function-runner</module>
-        <module>web-flux-starter</module>
+        <module>app-dependency-management</module>
         <module>utils</module>
         <module>springboot-application-properties-js</module>
         <module>demo</module>
+        <module>app-dependency-management/app-starter</module>
+        <module>app-dependency-management/data-starter</module>
+        <module>app-dependency-management/test-starter</module>
     </modules>
 
     <dependencies>

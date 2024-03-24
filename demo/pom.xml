@@ -8,12 +8,12 @@
     </parent>
     <groupId>org.example</groupId>
     <artifactId>demo</artifactId>
-    <name>Tool Set - Test Field</name>
+    <name>Tool Set - Project Demo</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
             <groupId>lu.nyo</groupId>
-            <artifactId>web-flux-starter</artifactId>
+            <artifactId>app-dependency-management</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
