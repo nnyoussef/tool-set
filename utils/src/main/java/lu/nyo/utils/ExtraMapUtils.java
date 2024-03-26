@@ -25,7 +25,7 @@ public class ExtraMapUtils {
         for (Map.Entry<String, Object> entry : source.entrySet()) {
             String k = entry.getKey();
             Object v = entry.getValue();
-            String nestedKey = key.concat(".").concat("k");
+            String nestedKey = key.concat(".").concat(k);
             if (v instanceof Map) {
                 flatten((Map<String, Object>) v, result, nestedKey, transformValues);
             } else {

@@ -52,9 +52,7 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
     };
 
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent environmentPreparedEvent) {
-
         URL jsConfigPath = getApplicationJsFileUrl(environmentPreparedEvent);
-
         Context context = createContext();
 
         Source source;
@@ -76,13 +74,11 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
             PropertiesPropertySource propertiesPropertySource = new PropertiesPropertySource(PROPERTY_SOURCE_NAME, properties);
 
             environmentPreparedEvent.getEnvironment().getPropertySources().addFirst(propertiesPropertySource);
-
         } catch (Exception e) {
             throw new JsPropertiesImporterException(SCRIPT_EXECUTION_ERROR, e.getCause());
         } finally {
             context.close(true);
         }
-
     }
 
     private static Map<String, Plugin<Object, Object>> getPlugins() {
@@ -100,8 +96,8 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
 
     private static URL getApplicationJsFileUrl(ApplicationEnvironmentPreparedEvent environmentPreparedEvent) {
         return environmentPreparedEvent
-                .getSource()
-                .getClass()
+                .getSpringApplication()
+                .getMainApplicationClass()
                 .getClassLoader()
                 .getResource(APPLICATION_PROPERTIES_FILE_NAME);
     }
