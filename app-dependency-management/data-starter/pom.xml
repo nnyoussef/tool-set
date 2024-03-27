@@ -8,6 +8,7 @@
     </parent>
     <artifactId>data-starter</artifactId>
     <name>Tool Set - Spring Data Interaction</name>
+    <packaging>pom</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

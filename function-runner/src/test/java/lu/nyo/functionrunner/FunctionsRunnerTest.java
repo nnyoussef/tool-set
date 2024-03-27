@@ -5,8 +5,6 @@ import lu.nyo.functionrunner.interfaces.Context;
 import lu.nyo.functionrunner.interfaces.ExecutionUnit;
 import lu.nyo.functionrunner.interfaces.FunctionFactory;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -17,9 +15,8 @@ import static java.util.Map.of;
 import static lu.nyo.functionrunner.FunctionsRunner.create;
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class)
 public class FunctionsRunnerTest {
-    class TestFunctionFactory extends FunctionFactory {
+    class TestFunctionFactory extends FunctionFactory<Class<? extends ExecutionUnit>> {
         @Override
         protected <T extends ExecutionUnit> T resolve(Class<? extends ExecutionUnit> tClass) {
             Map<Class, T> inits = new HashMap<>() {{
@@ -48,6 +45,7 @@ public class FunctionsRunnerTest {
     public void functionRunnerDefaultConstructorAccessTest() {
         Constructor<?> constructor = FunctionsRunner.class.getDeclaredConstructors()[0];
         constructor.setAccessible(true);
+
         try {
             constructor.newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
@@ -114,7 +112,7 @@ public class FunctionsRunnerTest {
                         Test9.class));
 
         assertTrue(runtimeException.getCause() instanceof ClassNotFoundException);
-        assertEquals(runtimeException.getCause().getMessage(), "lu.nyo.functionrunner.FunctionsRunnerTest.TestFunctionFactory Cannot resolve lu.nyo.functionrunner.functions.Test10Fallback");
+        assertEquals(runtimeException.getCause().getMessage(), "lu.nyo.functionrunner.FunctionsRunnerTest.TestFunctionFactory Cannot resolve class lu.nyo.functionrunner.functions.Test10Fallback");
     }
 
     @Test
@@ -127,7 +125,7 @@ public class FunctionsRunnerTest {
         });
 
         assertTrue(functionRunnerException.getExceptionToHandle() instanceof ClassNotFoundException);
-        assertEquals(functionRunnerException.getExceptionToHandle().getMessage(), "lu.nyo.functionrunner.FunctionsRunnerTest.TestFunctionFactory Cannot resolve lu.nyo.functionrunner.functions.Test8");
+        assertEquals(functionRunnerException.getExceptionToHandle().getMessage(), "lu.nyo.functionrunner.FunctionsRunnerTest.TestFunctionFactory Cannot resolve class lu.nyo.functionrunner.functions.Test8");
     }
 
 

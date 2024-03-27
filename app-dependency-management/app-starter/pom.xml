@@ -8,6 +8,7 @@
     </parent>
     <artifactId>app-starter</artifactId>
     <name>Tool Set - Spring Webflux Springboot Application</name>
+    <packaging>pom</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
