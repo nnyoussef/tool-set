@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>lu.nyo</groupId>
@@ -15,10 +16,11 @@
         <module>app-dependency-management</module>
         <module>utils</module>
         <module>springboot-application-properties-js</module>
-        <module>demo</module>
         <module>app-dependency-management/app-starter</module>
         <module>app-dependency-management/data-starter</module>
         <module>app-dependency-management/test-starter</module>
+        <module>springboot-application-starter</module>
+        <module>excel-renderer</module>
     </modules>
 
     <build>

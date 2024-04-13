@@ -1,0 +1,33 @@
+/* Cell Style for header*/
+thead .bleuFonce {
+    background: #000080;
+    border: 1px solid #7F7F7F !important;
+    color: #FFFFFF;
+    padding-right: 12px;
+    padding-left: 12px;
+    text-align: center;
+}
+
+thead .bleuClaire {
+    background: #6EAAE6;
+    border: 1px solid #7F7F7F;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+/* Cell style By Default*/
+thead .default {
+    border: none;
+}
+
+tbody .default {
+    border: 1px solid #7F7F7F;
+    color: #000000;
+}
+
+tfoot .default {
+    background: #A9A9A9;
+    color: #000000;
+    font-weight: bold;
+    border: 1px solid #7F7F7F;
+}

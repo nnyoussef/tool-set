@@ -52,10 +52,10 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
     };
 
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent environmentPreparedEvent) {
-        URL jsConfigPath = getApplicationJsFileUrl(environmentPreparedEvent);
-        Context context = createContext();
+        final URL jsConfigPath = getApplicationJsFileUrl(environmentPreparedEvent);
+        final Context context = createContext();
 
-        Source source;
+        final Source source;
         try {
             assert jsConfigPath != null;
             source = createSource(jsConfigPath);
@@ -64,14 +64,14 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
         }
 
         try {
-            Map<String, Object> userDefinedConfiguration = runScript(context, source, environmentPreparedEvent);
+            final Map<String, Object> userDefinedConfiguration = runScript(context, source, environmentPreparedEvent);
 
-            Map<String, String> flattenedMap = flatten(userDefinedConfiguration, Object::toString);
+            final Map<String, String> flattenedMap = flatten(userDefinedConfiguration, Object::toString);
 
-            Properties properties = new Properties();
+            final Properties properties = new Properties();
             flattenedMap.forEach(properties::setProperty);
 
-            PropertiesPropertySource propertiesPropertySource = new PropertiesPropertySource(PROPERTY_SOURCE_NAME, properties);
+            final PropertiesPropertySource propertiesPropertySource = new PropertiesPropertySource(PROPERTY_SOURCE_NAME, properties);
 
             environmentPreparedEvent.getEnvironment().getPropertySources().addFirst(propertiesPropertySource);
         } catch (Exception e) {
@@ -110,11 +110,11 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
                                                  Source source,
                                                  ApplicationEnvironmentPreparedEvent environmentPreparedEvent) {
 
-        ConfigurableEnvironment configurableEnvironment = environmentPreparedEvent.getEnvironment();
-        String[] activeProfiles = configurableEnvironment.getActiveProfiles();
-        Map<String, Object> systemEnvironment = configurableEnvironment.getSystemEnvironment();
-        Map<String, Object> systemProperties = configurableEnvironment.getSystemProperties();
-        Map<String, Plugin<Object, Object>> plugins = getPlugins();
+        final ConfigurableEnvironment configurableEnvironment = environmentPreparedEvent.getEnvironment();
+        final String[] activeProfiles = configurableEnvironment.getActiveProfiles();
+        final Map<String, Object> systemEnvironment = configurableEnvironment.getSystemEnvironment();
+        final Map<String, Object> systemProperties = configurableEnvironment.getSystemProperties();
+        final Map<String, Plugin<Object, Object>> plugins = getPlugins();
 
         return context.eval(source)
                 .execute(activeProfiles, systemEnvironment, systemProperties, plugins)
