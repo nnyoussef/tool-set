@@ -2,6 +2,7 @@ package nnyo.excel.renderer.utils;
 
 import nnyo.excel.renderer.dto.CursorPosition;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 public final class SpanUtils {
@@ -9,7 +10,7 @@ public final class SpanUtils {
     private SpanUtils() {
     }
 
-    public static CellRangeAddress createSpan(XSSFSheet sheet,
+    public static CellRangeAddress createSpan(SXSSFSheet sheet,
                                               int rowSpan,
                                               int colSpan,
                                               CursorPosition cursorPosition) {

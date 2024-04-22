@@ -8,11 +8,10 @@ import nnyo.excel.renderer.dto.CursorPositionManager;
 import nnyo.excel.renderer.excel_element.Row;
 import nnyo.excel.renderer.excel_element.Table;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class TableExcelElementHandler implements ExcelElementRenderer {
     @Override
     public void handle(CursorPosition cursorPosition,
                        Object elementToHandle,
-                       XSSFSheet worksheet,
+                       SXSSFSheet worksheet,
                        CellStyleProcessor cellStyleProcessor) {
 
         final Table table = ((Table) elementToHandle);
@@ -53,7 +52,7 @@ public class TableExcelElementHandler implements ExcelElementRenderer {
         CursorPositionManager.putCursorOnNextEmptyLine(cursorPosition);
     }
 
-    private void render(final XSSFSheet worksheet,
+    private void render(final SXSSFSheet worksheet,
                         final Stream<Row> rows,
                         final CursorPosition cursorPosition,
                         final String tableSection,
@@ -70,9 +69,9 @@ public class TableExcelElementHandler implements ExcelElementRenderer {
 
                 cursorPositionManager.setCursorToNextAvailableUnmergedColOnCurrentRow();
 
-                final XSSFRow xssfRow = getRow(worksheet, cursorPosition);
+                final SXSSFRow xssfRow = getRow(worksheet, cursorPosition);
 
-                final XSSFCell xssfCell = xssfRow.createCell(cursorPosition.getCellPosition());
+                final SXSSFCell xssfCell = xssfRow.createCell(cursorPosition.getCellPosition());
 
                 final XSSFCellStyle xssfCellStyle = cellStyleProcessor.createStyle(css);
 
@@ -108,9 +107,9 @@ public class TableExcelElementHandler implements ExcelElementRenderer {
         return css;
     }
 
-    private XSSFRow getRow(XSSFSheet sheet,
-                           CursorPosition cursorPosition) {
-        final XSSFRow xssfRow = sheet.getRow(cursorPosition.getRowPosition());
+    private SXSSFRow getRow(SXSSFSheet sheet,
+                            CursorPosition cursorPosition) {
+        final SXSSFRow xssfRow = sheet.getRow(cursorPosition.getRowPosition());
         if (xssfRow == null)
             return sheet.createRow(cursorPosition.getRowPosition());
         else return sheet.getRow(cursorPosition.getRowPosition());
@@ -118,21 +117,21 @@ public class TableExcelElementHandler implements ExcelElementRenderer {
 
     private void resolveBorderForMergedCells(CellRangeAddress cellRangeAddress,
                                              XSSFCellStyle xssfCellStyle,
-                                             XSSFSheet sheet) {
+                                             SXSSFSheet sheet) {
         if (cellRangeAddress.getNumberOfCells() == 1)
             return;
 
         setBorderBottom(xssfCellStyle.getBorderBottom(), cellRangeAddress, sheet);
         setBorderRight(xssfCellStyle.getBorderRight(), cellRangeAddress, sheet);
 
-        XSSFRow lastRow = sheet.getRow(cellRangeAddress.getLastRow());
+        SXSSFRow lastRow = sheet.getRow(cellRangeAddress.getLastRow());
         for (int i = cellRangeAddress.getFirstColumn(); i < cellRangeAddress.getLastColumn() + 1; i++) {
-            final XSSFCell xssfCell = lastRow.getCell(i);
+            final SXSSFCell xssfCell = lastRow.getCell(i);
             xssfCell.setCellStyle(xssfCellStyle);
         }
 
         for (int i = cellRangeAddress.getFirstRow(); i < cellRangeAddress.getLastRow() + 1; i++) {
-            final XSSFCell xssfCell = sheet.getRow(i).getCell(cellRangeAddress.getLastColumn());
+            final SXSSFCell xssfCell = sheet.getRow(i).getCell(cellRangeAddress.getLastColumn());
             xssfCell.setCellStyle(xssfCellStyle);
         }
 

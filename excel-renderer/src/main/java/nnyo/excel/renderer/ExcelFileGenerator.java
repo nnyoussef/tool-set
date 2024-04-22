@@ -4,10 +4,8 @@ package nnyo.excel.renderer;
 import nnyo.excel.renderer.dto.CursorPosition;
 import nnyo.excel.renderer.excel_element.Table;
 import nnyo.excel.renderer.excel_element_handlers.TableExcelElementHandler;
-import org.apache.poi.xssf.streaming.DeferredSXSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -30,14 +28,12 @@ public class ExcelFileGenerator {
     public static void generate(Map<String, LinkedList<Object>> rendereableObjectsPerSheet,
                                 String css,
                                 OutputStream outputStream) {
-        final Map<String, XSSFSheet> xssfSheetConcurrentHashMap = new HashMap<>(20);
 
-        try (XSSFWorkbook workbook = new XSSFWorkbook()) {
+        try (SXSSFWorkbook workbook = new SXSSFWorkbook()) {
             final CellStyleProcessor cellStyleProcessor = CellStyleProcessor.init(css, workbook);
 
             rendereableObjectsPerSheet.forEach((key, value) -> {
-                xssfSheetConcurrentHashMap.put(key, workbook.createSheet(key));
-                XSSFSheet xssfSheet = xssfSheetConcurrentHashMap.get(key);
+                SXSSFSheet xssfSheet = workbook.createSheet(key);
                 CursorPosition cursorPosition = new CursorPosition();
 
                 Iterator<Object> excelElementPerSheet = value.iterator();
@@ -49,9 +45,8 @@ public class ExcelFileGenerator {
                 }
             });
             workbook.write(outputStream);
-        } catch (Exception x) {
-            //todo: to remove after being done
-            x.printStackTrace();
+        } catch (Exception error) {
+            //not treated
         }
     }
 }

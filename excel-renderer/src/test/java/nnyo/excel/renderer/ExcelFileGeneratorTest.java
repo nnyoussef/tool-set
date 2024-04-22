@@ -18,6 +18,10 @@ import java.util.stream.IntStream;
 
 import static java.nio.file.Files.newOutputStream;
 import static java.nio.file.Path.of;
+import static java.time.Instant.ofEpochMilli;
+import static java.time.LocalDateTime.ofInstant;
+import static java.time.ZoneId.systemDefault;
+import static java.time.format.DateTimeFormatter.ofPattern;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toCollection;
 
@@ -25,7 +29,7 @@ public class ExcelFileGeneratorTest {
 
     private static final String EXPORT_PATH = System.getProperty("user.dir");
 
-    private static final int ROWS_COUNT_IN_BODY = 25_000;
+    private static final int ROWS_COUNT_IN_BODY = 400_000;
 
     @Test
     public void testSimpleTableFormat() throws IOException {
@@ -919,9 +923,8 @@ public class ExcelFileGeneratorTest {
 
     private static void printTime(String testName,
                                   long nanoseconds) {
-        long minutes = TimeUnit.MINUTES.convert(nanoseconds, TimeUnit.NANOSECONDS);
-        long seconds = TimeUnit.SECONDS.convert(nanoseconds, TimeUnit.NANOSECONDS) - minutes * 60;
-        long milliSeconds = TimeUnit.MILLISECONDS.convert(nanoseconds, TimeUnit.NANOSECONDS) - seconds * 1000;
-        System.out.printf("%s: %d minutes %d seconds %d milliseconds%n", testName, minutes, seconds, milliSeconds);
+        long milliSeconds = TimeUnit.MILLISECONDS.convert(nanoseconds, TimeUnit.NANOSECONDS) ;
+
+        System.out.printf("%s: %s%n", testName, ofInstant(ofEpochMilli(milliSeconds), systemDefault()).format(ofPattern("mm:ss.SSS")));
     }
 }

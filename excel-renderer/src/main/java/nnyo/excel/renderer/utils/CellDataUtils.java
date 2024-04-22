@@ -1,6 +1,7 @@
 package nnyo.excel.renderer.utils;
 
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 
 import static java.util.Optional.ofNullable;
@@ -12,7 +13,7 @@ public final class CellDataUtils {
     }
 
     public static void setData(Object data,
-                               XSSFCell xssfCell) {
+                               SXSSFCell xssfCell) {
         final String textToInsert = ofNullable(data)
                 .map(Object::toString)
                 .orElse("");

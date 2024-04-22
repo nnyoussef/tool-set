@@ -6,10 +6,10 @@ import nnyo.excel.renderer.constantes.CssConstantes;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
@@ -39,11 +39,11 @@ public class CellStyleProcessor {
 
     private final Map<String, XSSFCellStyle> cacheCellStyle = new HashMap<>(30);
 
-    private final XSSFWorkbook xssfWorkbook;
+    private final SXSSFWorkbook xssfWorkbook;
 
     private final Map<String, Map<String, String>> cssRuleDeclaration;
 
-    private CellStyleProcessor(XSSFWorkbook xssfWorkbook,
+    private CellStyleProcessor(SXSSFWorkbook xssfWorkbook,
                                Map<String, Map<String, String>> cssRuleDeclaration) {
         this.xssfWorkbook = xssfWorkbook;
         this.cssRuleDeclaration = cssRuleDeclaration;
@@ -51,7 +51,7 @@ public class CellStyleProcessor {
 
     //-------------------------- Init One Time - Public Usage -------------------------------------------------
     public static CellStyleProcessor init(String css,
-                                          XSSFWorkbook xssfWorkbook) throws IOException {
+                                          SXSSFWorkbook xssfWorkbook) throws IOException {
 
         final Map<String, Map<String, String>> cssRuleDeclaration = new HashMap<>(30);
 
@@ -92,7 +92,7 @@ public class CellStyleProcessor {
             return cacheCellStyle.get(css);
         }
 
-        final XSSFCellStyle xssfCellStyle = this.xssfWorkbook.createCellStyle();
+        final XSSFCellStyle xssfCellStyle = (XSSFCellStyle) this.xssfWorkbook.createCellStyle();
         final Map<String, String> cssProperties = this.cssRuleDeclaration.getOrDefault(css.trim().strip(), DEFAULT_CSS_PROPERTIES);
 
         createBorderFromCssInstructions(cssProperties, xssfCellStyle);
@@ -221,7 +221,7 @@ public class CellStyleProcessor {
         final XSSFColor textColor = getXSSFColorFromRgb(instructions.get(COLOR));
         boolean isBold = isBold(instructions);
 
-        final XSSFFont xssfFont = xssfWorkbook.createFont();
+        final XSSFFont xssfFont = ((XSSFFont) xssfWorkbook.createFont());
         xssfFont.setColor(textColor);
         xssfFont.setBold(isBold);
         xssfCellStyle.setFont(xssfFont);
