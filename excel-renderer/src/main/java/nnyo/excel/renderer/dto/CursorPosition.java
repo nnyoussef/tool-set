@@ -1,6 +1,6 @@
 package nnyo.excel.renderer.dto;
 
-public class CoordinateDto {
+public class CursorPosition {
     private int rowPosition = 1;
 
     private int cellPosition = 1;
@@ -13,13 +13,19 @@ public class CoordinateDto {
         return cellPosition;
     }
 
-    public void setCellPosition(int cellPosition) {
+    protected void setCellPosition(int cellPosition) {
         this.cellPosition = cellPosition;
     }
 
-    public void incrementPosition(int rowIncrement,
+    protected void incrementPosition(int rowIncrement,
                                   int colIncrement) {
         this.rowPosition += rowIncrement;
         this.cellPosition += colIncrement;
+    }
+
+    protected void setPosition(int rowPosition,
+                            int cellPosition) {
+        this.rowPosition = rowPosition;
+        this.cellPosition = cellPosition;
     }
 }

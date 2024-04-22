@@ -1,9 +1,11 @@
 package nnyo.excel.renderer;
 
 
-import nnyo.excel.renderer.dto.CoordinateDto;
+import nnyo.excel.renderer.dto.CursorPosition;
 import nnyo.excel.renderer.excel_element.Table;
 import nnyo.excel.renderer.excel_element_handlers.TableExcelElementHandler;
+import org.apache.poi.xssf.streaming.DeferredSXSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -31,24 +33,25 @@ public class ExcelFileGenerator {
         final Map<String, XSSFSheet> xssfSheetConcurrentHashMap = new HashMap<>(20);
 
         try (XSSFWorkbook workbook = new XSSFWorkbook()) {
-
             final CellStyleProcessor cellStyleProcessor = CellStyleProcessor.init(css, workbook);
 
             rendereableObjectsPerSheet.forEach((key, value) -> {
                 xssfSheetConcurrentHashMap.put(key, workbook.createSheet(key));
                 XSSFSheet xssfSheet = xssfSheetConcurrentHashMap.get(key);
-                CoordinateDto coordinateDto = new CoordinateDto();
+                CursorPosition cursorPosition = new CursorPosition();
 
                 Iterator<Object> excelElementPerSheet = value.iterator();
 
                 while (excelElementPerSheet.hasNext()) {
                     Object excelElementToHandle = excelElementPerSheet.next();
-                    STRATEGIES_MAP.get(Table.class).handle(coordinateDto, excelElementToHandle, xssfSheet, cellStyleProcessor);
+                    STRATEGIES_MAP.get(Table.class).handle(cursorPosition, excelElementToHandle, xssfSheet, cellStyleProcessor);
                     excelElementPerSheet.remove();
                 }
             });
             workbook.write(outputStream);
-        } catch (Exception ignored) {
+        } catch (Exception x) {
+            //todo: to remove after being done
+            x.printStackTrace();
         }
     }
 }

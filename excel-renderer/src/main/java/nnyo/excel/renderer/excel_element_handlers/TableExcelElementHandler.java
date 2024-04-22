@@ -3,24 +3,24 @@ package nnyo.excel.renderer.excel_element_handlers;
 
 import nnyo.excel.renderer.CellStyleProcessor;
 import nnyo.excel.renderer.ExcelElementRenderer;
-import nnyo.excel.renderer.dto.CoordinateDto;
+import nnyo.excel.renderer.dto.CursorPosition;
+import nnyo.excel.renderer.dto.CursorPositionManager;
 import nnyo.excel.renderer.excel_element.Row;
 import nnyo.excel.renderer.excel_element.Table;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 import static nnyo.excel.renderer.utils.CellDataUtils.setData;
 import static nnyo.excel.renderer.utils.SpanUtils.createSpan;
-import static nnyo.excel.renderer.utils.SpanUtils.findClosestUnmergedCellForRowAt;
 import static org.apache.poi.ss.util.RegionUtil.setBorderBottom;
 import static org.apache.poi.ss.util.RegionUtil.setBorderRight;
 
@@ -33,7 +33,7 @@ public class TableExcelElementHandler implements ExcelElementRenderer {
     }
 
     @Override
-    public void handle(CoordinateDto coordinateDto,
+    public void handle(CursorPosition cursorPosition,
                        Object elementToHandle,
                        XSSFSheet worksheet,
                        CellStyleProcessor cellStyleProcessor) {
@@ -46,50 +46,45 @@ public class TableExcelElementHandler implements ExcelElementRenderer {
 
         table.tableContentInitializer(header, body, footer);
 
-        render(worksheet, header.get(), coordinateDto, "thead", cellStyleProcessor);
-        render(worksheet, body.get(), coordinateDto, "tbody", cellStyleProcessor);
-        render(worksheet, footer.get(), coordinateDto, "tfoot", cellStyleProcessor);
+        render(worksheet, header.get(), cursorPosition, "thead", cellStyleProcessor);
+        render(worksheet, body.get(), cursorPosition, "tbody", cellStyleProcessor);
+        render(worksheet, footer.get(), cursorPosition, "tfoot", cellStyleProcessor);
 
-        coordinateDto.setCellPosition(1);
-        coordinateDto.incrementPosition(1, 0);
+        CursorPositionManager.putCursorOnNextEmptyLine(cursorPosition);
     }
 
     private void render(final XSSFSheet worksheet,
                         final Stream<Row> rows,
-                        final CoordinateDto coordinateDto,
+                        final CursorPosition cursorPosition,
                         final String tableSection,
                         final CellStyleProcessor cellStyleProcessor) {
 
-        final LinkedList<CellRangeAddress> trackedMergedRegions = new LinkedList<>();
+        final CursorPositionManager cursorPositionManager = new CursorPositionManager(cursorPosition);
 
         rows.forEach(row -> {
+
             row.getCells().forEach(cell -> {
                 final int rowSpan = cell.getRowSpan();
                 final int colSpan = cell.getColSpan();
                 final String css = getCssClassFullName(tableSection, cell.getCssClass());
 
-                coordinateDto.setCellPosition(findClosestUnmergedCellForRowAt(coordinateDto, trackedMergedRegions));
+                cursorPositionManager.setCursorToNextAvailableUnmergedColOnCurrentRow();
 
-                final XSSFRow xssfRow = getRow(worksheet, coordinateDto);
+                final XSSFRow xssfRow = getRow(worksheet, cursorPosition);
 
-                final XSSFCell xssfCell = xssfRow.createCell(coordinateDto.getCellPosition());
+                final XSSFCell xssfCell = xssfRow.createCell(cursorPosition.getCellPosition());
 
                 final XSSFCellStyle xssfCellStyle = cellStyleProcessor.createStyle(css);
 
-                final CellRangeAddress cellAddressesAfterMerging = createSpan(worksheet, rowSpan, colSpan, coordinateDto);
+                final CellRangeAddress cellAddressesAfterMerging = createSpan(worksheet, rowSpan, colSpan, cursorPosition);
 
-                if (cellAddressesAfterMerging.getNumberOfCells() > 1)
-                    trackedMergedRegions.add(cellAddressesAfterMerging);
-
-                coordinateDto.incrementPosition(0, colSpan);
+                cursorPositionManager.add(cellAddressesAfterMerging);
 
                 setData(cell.getData(), xssfCell);
                 resolveBorderForMergedCells(cellAddressesAfterMerging, xssfCellStyle, worksheet);
                 xssfCell.setCellStyle(xssfCellStyle);
-
             });
-            coordinateDto.setCellPosition(1); // each row iteration the cell cursor should be back to 1
-            coordinateDto.incrementPosition(1, 0); // tracing the position of the current row
+            cursorPositionManager.setCursorToNextAvailablePosition();
         });
     }
 
@@ -114,11 +109,11 @@ public class TableExcelElementHandler implements ExcelElementRenderer {
     }
 
     private XSSFRow getRow(XSSFSheet sheet,
-                           CoordinateDto coordinateDto) {
-        final XSSFRow xssfRow = sheet.getRow(coordinateDto.getRowPosition());
+                           CursorPosition cursorPosition) {
+        final XSSFRow xssfRow = sheet.getRow(cursorPosition.getRowPosition());
         if (xssfRow == null)
-            return sheet.createRow(coordinateDto.getRowPosition());
-        else return sheet.getRow(coordinateDto.getRowPosition());
+            return sheet.createRow(cursorPosition.getRowPosition());
+        else return sheet.getRow(cursorPosition.getRowPosition());
     }
 
     private void resolveBorderForMergedCells(CellRangeAddress cellRangeAddress,

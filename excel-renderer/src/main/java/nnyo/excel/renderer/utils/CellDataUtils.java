@@ -6,7 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isNumericSpace;
 
-public class CellDataUtils {
+public final class CellDataUtils {
 
     private CellDataUtils() {
     }
