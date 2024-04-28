@@ -1,10 +1,16 @@
-package nnyo.excel.renderer.dto;
+package nnyo.excel.renderer.cursor;
 
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.util.LinkedList;
 
 public class CursorPositionManager {
+
+    private static class CellRangeAddressNode {
+        private CellRangeAddressNode next;
+        private CellRangeAddressNode previous;
+        private CellRangeAddress value;
+    }
 
     final CursorPosition cursorPosition;
 
@@ -14,12 +20,6 @@ public class CursorPositionManager {
 
     public CursorPositionManager(CursorPosition cursorPosition) {
         this.cursorPosition = cursorPosition;
-    }
-
-    private static class CellRangeAddressNode {
-        private CellRangeAddressNode next;
-        private CellRangeAddressNode previous;
-        private CellRangeAddress value;
     }
 
     public void add(CellRangeAddress cellAddresses) {

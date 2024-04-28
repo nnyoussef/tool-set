@@ -1,9 +1,8 @@
 package nnyo.excel.renderer.utils;
 
-import nnyo.excel.renderer.dto.CursorPosition;
+import nnyo.excel.renderer.cursor.CursorPosition;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 public final class SpanUtils {
 

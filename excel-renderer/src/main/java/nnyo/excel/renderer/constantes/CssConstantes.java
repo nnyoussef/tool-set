@@ -26,23 +26,9 @@ public class CssConstantes {
 
     public static final String LEFT = "left";
 
-    public static final String HEX_LAVENDER_RED = "B0054B";
-
-    public static final int SECTION_TITLE_FONT_SIZE = 12;
-
-    public static final String HEX_GREEN = "2C876E";
-
-    public static final int REPORT_TITLE_FONT_SIZE = 10;
-
     public static final String TOP = "top";
 
     public static final String BOTTOM = "bottom";
-
-    public static final String ONE_PX = "1px";
-
-    public static final String TWO_PX = "2px";
-
-    public static final String SOLID = "solid";
 
     public static final String NORMAL_GRAY_BORDER_COLOR_HEX = "7F7F7F";
 

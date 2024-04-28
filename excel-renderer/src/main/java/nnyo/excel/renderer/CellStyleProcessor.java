@@ -84,7 +84,6 @@ public class CellStyleProcessor {
 
     //-------------------------- Public Usage -------------------------------------------------
 
-
     public XSSFCellStyle createStyle(String css) {
         css = css.trim().strip();
 

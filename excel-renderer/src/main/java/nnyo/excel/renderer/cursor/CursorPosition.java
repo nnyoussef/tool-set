@@ -1,4 +1,4 @@
-package nnyo.excel.renderer.dto;
+package nnyo.excel.renderer.cursor;
 
 public class CursorPosition {
     private int rowPosition = 1;

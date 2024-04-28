@@ -3,8 +3,8 @@ package nnyo.excel.renderer.excel_element_handlers;
 
 import nnyo.excel.renderer.CellStyleProcessor;
 import nnyo.excel.renderer.ExcelElementRenderer;
-import nnyo.excel.renderer.dto.CursorPosition;
-import nnyo.excel.renderer.dto.CursorPositionManager;
+import nnyo.excel.renderer.cursor.CursorPosition;
+import nnyo.excel.renderer.cursor.CursorPositionManager;
 import nnyo.excel.renderer.excel_element.Row;
 import nnyo.excel.renderer.excel_element.Table;
 import org.apache.poi.ss.util.CellRangeAddress;

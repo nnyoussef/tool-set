@@ -1,7 +1,7 @@
 package nnyo.excel.renderer;
 
 
-import nnyo.excel.renderer.dto.CursorPosition;
+import nnyo.excel.renderer.cursor.CursorPosition;
 import nnyo.excel.renderer.excel_element.Table;
 import nnyo.excel.renderer.excel_element_handlers.TableExcelElementHandler;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
