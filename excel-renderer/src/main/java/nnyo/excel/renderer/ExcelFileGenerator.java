@@ -35,7 +35,6 @@ public class ExcelFileGenerator {
             rendereableObjectsPerSheet.forEach((key, value) -> {
                 SXSSFSheet xssfSheet = workbook.createSheet(key);
                 CursorPosition cursorPosition = new CursorPosition();
-
                 Iterator<Object> excelElementPerSheet = value.iterator();
 
                 while (excelElementPerSheet.hasNext()) {

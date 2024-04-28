@@ -121,7 +121,7 @@ public class CursorPositionManager {
         }
     }
 
-    private void removeNodeFromChain(CellRangeAddressNode toRemove) {
+    private CellRangeAddressNode removeNodeFromChain(CellRangeAddressNode toRemove) {
         if (toRemove.next != null)
             toRemove.next.previous = toRemove.previous;
         if (toRemove.previous != null) {
@@ -129,13 +129,16 @@ public class CursorPositionManager {
         } else {
             first = toRemove.next;
         }
+        return toRemove.next;
     }
 
     private void clean() {
         CellRangeAddressNode scanned = first;
         while (scanned != null) {
-            if (cursorPosition.getRowPosition() > scanned.value.getLastRow())
-                removeNodeFromChain(scanned);
+            if (cursorPosition.getRowPosition() > scanned.value.getLastRow()) {
+                scanned = removeNodeFromChain(scanned);
+                continue;
+            }
             scanned = scanned.next;
         }
     }
