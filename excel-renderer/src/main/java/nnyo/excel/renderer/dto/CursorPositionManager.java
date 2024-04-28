@@ -2,89 +2,108 @@ package nnyo.excel.renderer.dto;
 
 import org.apache.poi.ss.util.CellRangeAddress;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.LinkedList;
 
 public class CursorPositionManager {
 
     final CursorPosition cursorPosition;
 
-    CellRangeAddressNode last = null;
     CellRangeAddressNode first = null;
+
+    LinkedList<CellRangeAddress> newlyAddedCellsToCurrentSelectedRow = new LinkedList<>();
 
     public CursorPositionManager(CursorPosition cursorPosition) {
         this.cursorPosition = cursorPosition;
     }
 
-    static class CellRangeAddressNode {
+    private static class CellRangeAddressNode {
         private CellRangeAddressNode next;
         private CellRangeAddressNode previous;
         private CellRangeAddress value;
     }
 
     public void add(CellRangeAddress cellAddresses) {
-        CellRangeAddressNode node = new CellRangeAddressNode();
-        node.previous = last;
-        node.value = cellAddresses;
-        if (last != null)
-            last.next = node;
-        last = node;
-
+        newlyAddedCellsToCurrentSelectedRow.add(cellAddresses);
         int colSpan = cellAddresses.getLastColumn() - cellAddresses.getFirstColumn() + 1;
         cursorPosition.incrementPosition(0, colSpan);
     }
 
-    public void setCursorToNextAvailablePosition() {
+    public void integrateNewlyAddedCellsToTheCurrentLastNode() {
+        CellRangeAddressNode visited = first;
+        CellRangeAddressNode hold = null;
+        for (CellRangeAddress cellAddresses : newlyAddedCellsToCurrentSelectedRow) {
 
-        int currentCursorRow = cursorPosition.getRowPosition();
-
-        CellRangeAddressNode scanned = last;
-        int minRowPosition = last.value.getLastRow();
-        int minColPosition = last.value.getFirstColumn();
-        while (scanned != null) {
-
-            if (scanned.value.getLastRow() - currentCursorRow > -1) {
-                if (isLessThan(scanned.value.getLastRow(), scanned.value.getFirstColumn(), minRowPosition, minColPosition)) {
-                    minRowPosition = scanned.value.getLastRow();
-                    minColPosition = scanned.value.getFirstColumn();
-                }
-            } else {
-                removeNodeFromChain(scanned);
+            if (first == null) {
+                first = new CellRangeAddressNode();
+                first.value = cellAddresses;
+                visited = first;
+                continue;
             }
-            first = scanned;
-            scanned = scanned.previous;
-        }
 
+            while (visited != null) {
+                if (visited.value.getFirstColumn() > cellAddresses.getFirstColumn()) {
+                    CellRangeAddressNode newNode = new CellRangeAddressNode();
+                    newNode.value = cellAddresses;
+                    newNode.next = visited;
+
+                    if (visited.previous == null) {
+                        visited.previous = newNode;
+                        first = newNode;
+                    } else {
+                        CellRangeAddressNode previous = visited.previous;
+                        newNode.previous = previous;
+                        visited.previous = newNode;
+                        previous.next = newNode;
+                    }
+
+                    break;
+                } else {
+                    hold = visited;
+                    visited = visited.next;
+                }
+            }
+
+            if (visited == null) {
+                visited = new CellRangeAddressNode();
+                visited.value = cellAddresses;
+                visited.previous = hold;
+                hold.next = visited;
+            }
+
+        }
+        newlyAddedCellsToCurrentSelectedRow.clear();
+    }
+
+    public void setCursorToNextAvailablePosition() {
+        integrateNewlyAddedCellsToTheCurrentLastNode();
+        CellRangeAddressNode scanned = first;
+        int minRowPosition = first.value.getLastRow();
+        int minColPosition = first.value.getLastColumn();
+        while (scanned != null) {
+            if (isLessThan(scanned.value.getLastRow(), scanned.value.getFirstColumn(), minRowPosition, minColPosition)) {
+                minRowPosition = scanned.value.getLastRow();
+                minColPosition = scanned.value.getFirstColumn();
+            }
+            scanned = scanned.next;
+        }
         cursorPosition.setPosition(minRowPosition + 1, minColPosition);
+        clean();
     }
 
     public void setCursorToNextAvailableUnmergedColOnCurrentRow() {
         CellRangeAddressNode scanned = first;
-        final AtomicInteger closestUnmergedCellForRowAt = new AtomicInteger(cursorPosition.getCellPosition());
-
-        boolean isAnUnmergedRegionFoundYet = false;
-
+        int closestUnmergedCellForRowAt = cursorPosition.getCellPosition();
         while (scanned != null) {
             CellRangeAddress cellAddresses = scanned.value;
-            final int firstRow = cellAddresses.getFirstRow();
-            final int lastRow = cellAddresses.getLastRow();
-
             final int firstColumn = cellAddresses.getFirstColumn();
             final int lastColumn = cellAddresses.getLastColumn();
-
-            final int currentRow = cursorPosition.getRowPosition();
-            final int currentColumnIndex = closestUnmergedCellForRowAt.get();
-
-            if ((currentRow >= firstRow & currentRow <= lastRow) & (currentColumnIndex >= firstColumn & currentColumnIndex <= lastColumn)) {
-                closestUnmergedCellForRowAt.set(lastColumn + 1);
-                isAnUnmergedRegionFoundYet = true;
-                scanned = scanned.next;
-                continue;
+            final int currentColumnIndex = closestUnmergedCellForRowAt;
+            if ((currentColumnIndex >= firstColumn & currentColumnIndex <= lastColumn)) {
+                closestUnmergedCellForRowAt = lastColumn + 1;
             }
-            if (isAnUnmergedRegionFoundYet)
-                break;
             scanned = scanned.next;
         }
-        cursorPosition.setCellPosition(closestUnmergedCellForRowAt.get());
+        cursorPosition.setCellPosition(closestUnmergedCellForRowAt);
     }
 
     public static void putCursorOnNextEmptyLine(CursorPosition cursorPosition) {
@@ -93,28 +112,32 @@ public class CursorPositionManager {
     }
 
     private boolean isLessThan(int row, int col, int row1, int col1) {
-        if (row <= row1)
+        if (row < row1)
+            return true;
+        else if (row == row1) {
             return col < col1;
-        return false;
+        } else {
+            return false;
+        }
     }
 
     private void removeNodeFromChain(CellRangeAddressNode toRemove) {
-        CellRangeAddressNode previous = toRemove.previous;
-        CellRangeAddressNode next = toRemove.next;
-        if (next != null)
-            next.previous = previous;
-        if (previous != null)
-            previous.next = next;
+        if (toRemove.next != null)
+            toRemove.next.previous = toRemove.previous;
+        if (toRemove.previous != null) {
+            toRemove.previous.next = toRemove.next;
+        } else {
+            first = toRemove.next;
+        }
     }
 
-    private int getSize() {
-        CellRangeAddressNode scanned = last;
-        int s = 0;
+    private void clean() {
+        CellRangeAddressNode scanned = first;
         while (scanned != null) {
-            s += 1;
-            scanned = scanned.previous;
+            if (cursorPosition.getRowPosition() > scanned.value.getLastRow())
+                removeNodeFromChain(scanned);
+            scanned = scanned.next;
         }
-        return s;
     }
 
 }

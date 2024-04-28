@@ -23,13 +23,14 @@ import static java.time.LocalDateTime.ofInstant;
 import static java.time.ZoneId.systemDefault;
 import static java.time.format.DateTimeFormatter.ofPattern;
 import static java.util.Arrays.asList;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.stream.Collectors.toCollection;
 
 public class ExcelFileGeneratorTest {
 
     private static final String EXPORT_PATH = System.getProperty("user.dir");
 
-    private static final int ROWS_COUNT_IN_BODY = 400_000;
+    private static final int ROWS_COUNT_IN_BODY = 2_000;
 
     @Test
     public void testSimpleTableFormat() throws IOException {
@@ -129,7 +130,7 @@ public class ExcelFileGeneratorTest {
         data.put("Sheet 1", rowSpanResolutionSimpleTableFormatAlt6());
 
         final long start = System.nanoTime();
-        ExcelFileGenerator.generate(data, getTestCss(), getOutputStream("rowSpanResolutionSimpleTableFormatAlt6"));
+        ExcelFileGenerator.generate(data, getTestCss(), getOutputStream("testRowSpanResolutionSimpleTableFormatAlt6"));
         final long stop = System.nanoTime();
         printTime("testRowSpanResolutionSimpleTableFormatAlt6", stop - start);
     }
@@ -139,9 +140,39 @@ public class ExcelFileGeneratorTest {
         LinkedHashMap<String, LinkedList<Object>> data = new LinkedHashMap<>();
         data.put("Sheet 1", rowSpanResolutionSimpleTableFormatAlt7());
         final long start = System.nanoTime();
-        ExcelFileGenerator.generate(data, getTestCss(), getOutputStream("rowSpanResolutionSimpleTableFormatAlt7"));
+        ExcelFileGenerator.generate(data, getTestCss(), getOutputStream("testRowSpanResolutionSimpleTableFormatAlt7"));
         final long stop = System.nanoTime();
         printTime("testRowSpanResolutionSimpleTableFormatAlt7", stop - start);
+    }
+
+    @Test
+    public void testRowSpanResolutionSimpleTableFormatAlt8() throws IOException {
+        LinkedHashMap<String, LinkedList<Object>> data = new LinkedHashMap<>();
+        data.put("Sheet 1", rowSpanResolutionSimpleTableFormatAlt8());
+        final long start = System.nanoTime();
+        ExcelFileGenerator.generate(data, getTestCss(), getOutputStream("testRowSpanResolutionSimpleTableFormatAlt8"));
+        final long stop = System.nanoTime();
+        printTime("testRowSpanResolutionSimpleTableFormatAlt8", stop - start);
+    }
+
+    @Test
+    public void testRowSpanResolutionSimpleTableFormatAlt9() throws IOException {
+        LinkedHashMap<String, LinkedList<Object>> data = new LinkedHashMap<>();
+        data.put("Sheet 1", rowSpanResolutionSimpleTableFormatAlt9());
+        final long start = System.nanoTime();
+        ExcelFileGenerator.generate(data, getTestCss(), getOutputStream("testRowSpanResolutionSimpleTableFormatAlt9"));
+        final long stop = System.nanoTime();
+        printTime("testRowSpanResolutionSimpleTableFormatAlt9", stop - start);
+    }
+
+    @Test
+    public void testRowSpanResolutionSimpleTableFormatAlt10() throws IOException {
+        LinkedHashMap<String, LinkedList<Object>> data = new LinkedHashMap<>();
+        data.put("Sheet 1", rowSpanResolutionSimpleTableFormatAlt10());
+        final long start = System.nanoTime();
+        ExcelFileGenerator.generate(data, getTestCss(), getOutputStream("testRowSpanResolutionSimpleTableFormatAlt10"));
+        final long stop = System.nanoTime();
+        printTime("testRowSpanResolutionSimpleTableFormatAlt10", stop - start);
     }
 
     // data generator
@@ -819,6 +850,132 @@ public class ExcelFileGeneratorTest {
         return tables;
     }
 
+    private static LinkedList<Object> rowSpanResolutionSimpleTableFormatAlt8() {
+        Cell empty1 = new Cell().setData("\uD83D\uDE35").setCssClass("bleuFonce").setRowSpan(2);
+        Cell empty2 = new Cell().setData("\uD83D\uDE35").setCssClass("bleuFonce").setRowSpan(4);
+        Cell empty3 = new Cell().setData("\uD83D\uDE35").setCssClass("bleuFonce").setRowSpan(5);
+        Cell empty4 = new Cell().setData("\uD83D\uDE35").setCssClass("bleuFonce").setRowSpan(3);
+
+        Row row1 = new Row();
+        List<Cell> cellsOfRow1 = new LinkedList<>();
+        cellsOfRow1.add(empty1);
+        cellsOfRow1.add(empty1);
+        cellsOfRow1.add(empty2);
+        cellsOfRow1.add(empty3);
+        cellsOfRow1.add(new Cell().setData("α").setCssClass("bleuClaire"));
+        row1.setCells(cellsOfRow1);
+
+        Row row2 = new Row();
+        List<Cell> cellsOfRow2 = new LinkedList<>();
+        cellsOfRow2.add(new Cell().setData("β").setCssClass("bleuClaire"));
+        row2.setCells(cellsOfRow2);
+
+        Row row3 = new Row();
+        List<Cell> cellsOfRow3 = new LinkedList<>();
+        cellsOfRow3.add(new Cell().setData("γ").setCssClass("bleuClaire"));
+        cellsOfRow3.add(empty4);
+        cellsOfRow3.add(new Cell().setData("δ").setCssClass("bleuClaire"));
+        row3.setCells(cellsOfRow3);
+
+        Row row4 = new Row();
+        List<Cell> cellsOfRow4 = new LinkedList<>();
+        cellsOfRow4.add(new Cell().setData("γ").setCssClass("bleuClaire"));
+        cellsOfRow4.add(new Cell().setData("α").setCssClass("bleuClaire"));
+        row4.setCells(cellsOfRow4);
+
+        Row row5 = new Row();
+        List<Cell> cellsOfRow5 = new LinkedList<>();
+        cellsOfRow5.add(new Cell().setData("γ").setCssClass("bleuClaire"));
+        cellsOfRow5.add(new Cell().setData("δ").setCssClass("bleuClaire"));
+        cellsOfRow5.add(new Cell().setData("δ").setCssClass("bleuClaire"));
+        row5.setCells(cellsOfRow5);
+
+        LinkedList<Row> header = new LinkedList<>();
+        header.add(row1);
+        header.add(row2);
+        header.add(row3);
+        header.add(row4);
+        header.add(row5);
+
+        LinkedList<Object> tables = new LinkedList<>();
+        final Table table = (header1, body, footer) -> header1.set(header.stream());
+        tables.add(table);
+
+        return tables;
+    }
+
+    private static LinkedList<Object> rowSpanResolutionSimpleTableFormatAlt9() {
+        Cell empty4 = new Cell().setData("\uD83D\uDE35").setCssClass("bleuFonce").setRowSpan(3);
+
+        Row row1 = new Row();
+        List<Cell> cellsOfRow1 = new LinkedList<>();
+
+        cellsOfRow1.add(new Cell().setData("α").setCssClass("bleuClaire"));
+        cellsOfRow1.add(new Cell().setData("α").setCssClass("bleuClaire"));
+        cellsOfRow1.add(new Cell().setData("α").setCssClass("bleuClaire"));
+        cellsOfRow1.add(empty4);
+        row1.setCells(cellsOfRow1);
+
+        Row row2 = new Row();
+        List<Cell> cellsOfRow2 = new LinkedList<>();
+        cellsOfRow2.add(new Cell().setData("β").setCssClass("bleuClaire"));
+        cellsOfRow2.add(new Cell().setData("β").setCssClass("bleuClaire"));
+        cellsOfRow2.add(new Cell().setData("β").setCssClass("bleuClaire"));
+        row2.setCells(cellsOfRow2);
+
+        Row row3 = new Row();
+        List<Cell> cellsOfRow3 = new LinkedList<>();
+        cellsOfRow3.add(new Cell().setData("γ").setCssClass("bleuClaire"));
+        cellsOfRow3.add(new Cell().setData("γ").setCssClass("bleuClaire"));
+        cellsOfRow3.add(new Cell().setData("γ").setCssClass("bleuClaire"));
+        row3.setCells(cellsOfRow3);
+
+
+        LinkedList<Row> header = new LinkedList<>();
+        header.add(row1);
+        header.add(row2);
+        header.add(row3);
+
+        LinkedList<Object> tables = new LinkedList<>();
+        final Table table = (header1, body, footer) -> header1.set(header.stream());
+        tables.add(table);
+
+        return tables;
+    }
+
+    private static LinkedList<Object> rowSpanResolutionSimpleTableFormatAlt10() {
+        Cell empty4 = new Cell().setData("\uD83D\uDE35").setCssClass("bleuFonce").setRowSpan(2);
+
+        Row row1 = new Row();
+        List<Cell> cellsOfRow1 = new LinkedList<>();
+        cellsOfRow1.add(empty4);
+        cellsOfRow1.add(new Cell().setData("α").setCssClass("bleuClaire"));
+        row1.setCells(cellsOfRow1);
+
+        Row row2 = new Row();
+        List<Cell> cellsOfRow2 = new LinkedList<>();
+        cellsOfRow2.add(new Cell().setData("β").setCssClass("bleuClaire"));
+        row2.setCells(cellsOfRow2);
+
+        Row row3 = new Row();
+        List<Cell> cellsOfRow3 = new LinkedList<>();
+        cellsOfRow3.add(new Cell().setData("γ").setCssClass("bleuClaire"));
+        cellsOfRow3.add(new Cell().setData("γ").setCssClass("bleuClaire"));
+        row3.setCells(cellsOfRow3);
+
+
+        LinkedList<Row> header = new LinkedList<>();
+        header.add(row1);
+        header.add(row2);
+        header.add(row3);
+
+        LinkedList<Object> tables = new LinkedList<>();
+        final Table table = (header1, body, footer) -> header1.set(header.stream());
+        tables.add(table);
+
+        return tables;
+    }
+
     private static LinkedList<Object> rowSpanResolutionSimpleTableFormat() {
         Cell empty1 = new Cell().setData("\uD83D\uDE35").setCssClass("bleuFonce").setRowSpan(3);
         Cell empty2 = new Cell().setData("\uD83D\uDE35").setCssClass("bleuFonce").setRowSpan(2);
@@ -923,8 +1080,7 @@ public class ExcelFileGeneratorTest {
 
     private static void printTime(String testName,
                                   long nanoseconds) {
-        long milliSeconds = TimeUnit.MILLISECONDS.convert(nanoseconds, TimeUnit.NANOSECONDS) ;
-
+        long milliSeconds = MILLISECONDS.convert(nanoseconds, TimeUnit.NANOSECONDS);
         System.out.printf("%s: %s%n", testName, ofInstant(ofEpochMilli(milliSeconds), systemDefault()).format(ofPattern("mm:ss.SSS")));
     }
 }

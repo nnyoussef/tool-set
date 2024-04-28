@@ -31,7 +31,7 @@ public class ExcelFileGenerator {
 
         try (SXSSFWorkbook workbook = new SXSSFWorkbook()) {
             final CellStyleProcessor cellStyleProcessor = CellStyleProcessor.init(css, workbook);
-
+            workbook.setCompressTempFiles(true);
             rendereableObjectsPerSheet.forEach((key, value) -> {
                 SXSSFSheet xssfSheet = workbook.createSheet(key);
                 CursorPosition cursorPosition = new CursorPosition();
@@ -45,8 +45,7 @@ public class ExcelFileGenerator {
                 }
             });
             workbook.write(outputStream);
-        } catch (Exception error) {
-            //not treated
+        } catch (Exception ignored) {
         }
     }
 }
