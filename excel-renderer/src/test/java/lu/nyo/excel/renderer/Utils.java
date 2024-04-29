@@ -1,4 +1,4 @@
-package nnyo.excel.renderer;
+package lu.nyo.excel.renderer;
 
 import org.apache.commons.io.IOUtils;
 

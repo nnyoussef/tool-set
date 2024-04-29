@@ -1,8 +1,8 @@
-package nnyo.excel.renderer;
+package lu.nyo.excel.renderer;
 
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
-import nnyo.excel.renderer.constantes.CssConstantes;
+import lu.nyo.excel.renderer.constantes.CssConstantes;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
@@ -26,7 +26,6 @@ import java.util.Map;
 import static java.lang.Integer.parseInt;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.joining;
-import static nnyo.excel.renderer.constantes.CssConstantes.*;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 import static org.apache.poi.ss.usermodel.BorderStyle.NONE;
@@ -92,7 +91,7 @@ public class CellStyleProcessor {
         }
 
         final XSSFCellStyle xssfCellStyle = (XSSFCellStyle) this.xssfWorkbook.createCellStyle();
-        final Map<String, String> cssProperties = this.cssRuleDeclaration.getOrDefault(css.trim().strip(), DEFAULT_CSS_PROPERTIES);
+        final Map<String, String> cssProperties = this.cssRuleDeclaration.getOrDefault(css.trim().strip(), CssConstantes.DEFAULT_CSS_PROPERTIES);
 
         createBorderFromCssInstructions(cssProperties, xssfCellStyle);
         createAlignementFromCssInstruction(cssProperties, xssfCellStyle);
@@ -107,7 +106,7 @@ public class CellStyleProcessor {
     private void createBorderFromCssInstructions(final Map<String, String> instructions,
                                                  final XSSFCellStyle xssfCellStyle) {
         instructions.forEach((prop, value) -> {
-            if (prop.equals(BORDER)) {
+            if (prop.equals(CssConstantes.BORDER)) {
                 final XSSFColor xssfColor = getBorderColor(value);
                 xssfCellStyle.setBorderBottom(getBorderStyle(value));
                 xssfCellStyle.setBottomBorderColor(xssfColor);
@@ -121,19 +120,19 @@ public class CellStyleProcessor {
                 xssfCellStyle.setBorderRight(getBorderStyle(value));
                 xssfCellStyle.setRightBorderColor(xssfColor);
 
-            } else if (prop.contains(BORDER_DASH)) {
-                final String side = prop.split(DASH)[1];
+            } else if (prop.contains(CssConstantes.BORDER_DASH)) {
+                final String side = prop.split(CssConstantes.DASH)[1];
                 final XSSFColor xssfColor = getBorderColor(value);
                 switch (side) {
                     case CssConstantes.LEFT -> {
                         xssfCellStyle.setBorderBottom(getBorderStyle(value));
                         xssfCellStyle.setBottomBorderColor(xssfColor);
                     }
-                    case TOP -> {
+                    case CssConstantes.TOP -> {
                         xssfCellStyle.setBorderTop(getBorderStyle(value));
                         xssfCellStyle.setTopBorderColor(xssfColor);
                     }
-                    case BOTTOM -> {
+                    case CssConstantes.BOTTOM -> {
                         xssfCellStyle.setBorderLeft(getBorderStyle(value));
                         xssfCellStyle.setLeftBorderColor(xssfColor);
                     }
@@ -150,7 +149,7 @@ public class CellStyleProcessor {
         final String borderPropertiesWithoutColor = Arrays.stream(css.split("[ ]"))
                 .filter(e -> e.contains("1p") || e.contains("2p") || e.contains("sol") || e.contains("das"))
                 .collect(joining(" "));
-        return CSS_BORDER_VALUE_TO_BORDER_STYLE_MAP.getOrDefault(borderPropertiesWithoutColor, NONE);
+        return CssConstantes.CSS_BORDER_VALUE_TO_BORDER_STYLE_MAP.getOrDefault(borderPropertiesWithoutColor, NONE);
 
     }
 
@@ -158,27 +157,27 @@ public class CellStyleProcessor {
         final XSSFColor xssfColor = new XSSFColor();
         final String[] borderStyleComposition = css.split(SPACE);
         final String borderColor = Arrays.stream(borderStyleComposition)
-                .filter(e -> e.contains(HASHBANG))
+                .filter(e -> e.contains(CssConstantes.HASHBANG))
                 .findFirst()
-                .orElse(NORMAL_GRAY_BORDER_COLOR_HEX);
-        xssfColor.setARGBHex(borderColor.replace(HASHBANG, EMPTY));
+                .orElse(CssConstantes.NORMAL_GRAY_BORDER_COLOR_HEX);
+        xssfColor.setARGBHex(borderColor.replace(CssConstantes.HASHBANG, EMPTY));
         return xssfColor;
     }
 
     private HorizontalAlignment getHorizontalAlignmentFromString(String textAlignment) {
         return switch (ofNullable(textAlignment).orElse(EMPTY)) {
-            case TEXT_ALIGN_CENTER -> HorizontalAlignment.CENTER;
-            case TEXT_ALIGN_RIGHT -> RIGHT;
+            case CssConstantes.TEXT_ALIGN_CENTER -> HorizontalAlignment.CENTER;
+            case CssConstantes.TEXT_ALIGN_RIGHT -> RIGHT;
             default -> LEFT;
         };
     }
 
     private XSSFColor getXSSFColorFromRgb(String rgb) {
         final XSSFColor xssfColor = new XSSFColor();
-        xssfColor.setARGBHex(HEX_WHITE);
+        xssfColor.setARGBHex(CssConstantes.HEX_WHITE);
 
         if (StringUtils.isEmpty(rgb)) {
-            xssfColor.setARGBHex(HEX_WHITE);
+            xssfColor.setARGBHex(CssConstantes.HEX_WHITE);
         } else if (rgb.contains("rgb")) {
             rgb = rgb.replace("rgb(", "").replace(")", "");
             String[] rgbArr = rgb.split(",");
@@ -196,28 +195,28 @@ public class CellStyleProcessor {
     }
 
     private boolean isBold(Map<String, String> cssProperties) {
-        return ofNullable(cssProperties.get(FONT_WEIGHT))
-                .map(fw -> fw.contains(BOLD))
+        return ofNullable(cssProperties.get(CssConstantes.FONT_WEIGHT))
+                .map(fw -> fw.contains(CssConstantes.BOLD))
                 .orElse(false);
     }
 
     private void createAlignementFromCssInstruction(Map<String, String> instructions,
                                                     XSSFCellStyle xssfCellStyle) {
-        final String textAlignment = instructions.get(TEXT_ALIGN);
+        final String textAlignment = instructions.get(CssConstantes.TEXT_ALIGN);
         xssfCellStyle.setVerticalAlignment(CENTER);
         xssfCellStyle.setAlignment(getHorizontalAlignmentFromString(textAlignment));
     }
 
     private void createCellBackgroundFromCssInstruction(Map<String, String> instructions,
                                                         XSSFCellStyle xssfCellStyle) {
-        final String cellBackground = instructions.get(BACKGROUND);
+        final String cellBackground = instructions.get(CssConstantes.BACKGROUND);
         xssfCellStyle.setFillForegroundColor(getXSSFColorFromRgb(cellBackground));
         xssfCellStyle.setFillPattern(SOLID_FOREGROUND);
     }
 
     private void createFontFromCssInstruction(Map<String, String> instructions,
                                               XSSFCellStyle xssfCellStyle) {
-        final XSSFColor textColor = getXSSFColorFromRgb(instructions.get(COLOR));
+        final XSSFColor textColor = getXSSFColorFromRgb(instructions.get(CssConstantes.COLOR));
         boolean isBold = isBold(instructions);
 
         final XSSFFont xssfFont = ((XSSFFont) xssfWorkbook.createFont());

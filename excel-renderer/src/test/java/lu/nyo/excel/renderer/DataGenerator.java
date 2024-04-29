@@ -1,8 +1,8 @@
-package nnyo.excel.renderer;
+package lu.nyo.excel.renderer;
 
-import nnyo.excel.renderer.excel_element.Cell;
-import nnyo.excel.renderer.excel_element.Row;
-import nnyo.excel.renderer.excel_element.Table;
+import lu.nyo.excel.renderer.excel_element.Cell;
+import lu.nyo.excel.renderer.excel_element.Row;
+import lu.nyo.excel.renderer.excel_element.Table;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,8 +12,8 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toCollection;
 
 public class DataGenerator {
-    private static final int ROWS_COUNT_IN_BODY = 1_000;
-    private static final int CELL_LIST_MULTIPLIER = 1;
+    private static final int ROWS_COUNT_IN_BODY = 200_000;
+    private static final int CELL_LIST_MULTIPLIER = 2;
 
     public static LinkedList<Object> simpleTableFormatData() {
 

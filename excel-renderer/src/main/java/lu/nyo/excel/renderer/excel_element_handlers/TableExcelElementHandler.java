@@ -1,12 +1,13 @@
-package nnyo.excel.renderer.excel_element_handlers;
+package lu.nyo.excel.renderer.excel_element_handlers;
 
 
-import nnyo.excel.renderer.CellStyleProcessor;
-import nnyo.excel.renderer.ExcelElementRenderer;
-import nnyo.excel.renderer.cursor.CursorPosition;
-import nnyo.excel.renderer.cursor.CursorPositionManager;
-import nnyo.excel.renderer.excel_element.Row;
-import nnyo.excel.renderer.excel_element.Table;
+import lu.nyo.excel.renderer.ExcelElementRenderer;
+import lu.nyo.excel.renderer.cursor.CursorPosition;
+import lu.nyo.excel.renderer.excel_element.Table;
+import lu.nyo.excel.renderer.utils.CellDataUtils;
+import lu.nyo.excel.renderer.CellStyleProcessor;
+import lu.nyo.excel.renderer.cursor.CursorPositionManager;
+import lu.nyo.excel.renderer.excel_element.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
@@ -18,8 +19,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
-import static nnyo.excel.renderer.utils.CellDataUtils.setData;
-import static nnyo.excel.renderer.utils.SpanUtils.createSpan;
+import static lu.nyo.excel.renderer.utils.SpanUtils.createSpan;
 import static org.apache.poi.ss.util.RegionUtil.setBorderBottom;
 import static org.apache.poi.ss.util.RegionUtil.setBorderRight;
 
@@ -79,7 +79,7 @@ public class TableExcelElementHandler implements ExcelElementRenderer {
 
                 cursorPositionManager.add(cellAddressesAfterMerging);
 
-                setData(cell.getData(), xssfCell);
+                CellDataUtils.setData(cell.getData(), xssfCell);
                 resolveBorderForMergedCells(cellAddressesAfterMerging, xssfCellStyle, worksheet);
                 xssfCell.setCellStyle(xssfCellStyle);
             });

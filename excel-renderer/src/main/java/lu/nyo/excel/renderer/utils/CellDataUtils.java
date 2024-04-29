@@ -1,4 +1,4 @@
-package nnyo.excel.renderer.utils;
+package lu.nyo.excel.renderer.utils;
 
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.streaming.SXSSFCell;

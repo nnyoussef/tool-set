@@ -1,6 +1,6 @@
-package nnyo.excel.renderer;
+package lu.nyo.excel.renderer;
 
-import nnyo.excel.renderer.cursor.CursorPosition;
+import lu.nyo.excel.renderer.cursor.CursorPosition;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 
 public interface ExcelElementRenderer {

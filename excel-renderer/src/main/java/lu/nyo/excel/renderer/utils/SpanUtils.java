@@ -1,6 +1,6 @@
-package nnyo.excel.renderer.utils;
+package lu.nyo.excel.renderer.utils;
 
-import nnyo.excel.renderer.cursor.CursorPosition;
+import lu.nyo.excel.renderer.cursor.CursorPosition;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 

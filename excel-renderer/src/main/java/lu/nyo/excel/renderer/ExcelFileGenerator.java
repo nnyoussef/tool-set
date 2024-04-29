@@ -1,12 +1,13 @@
-package nnyo.excel.renderer;
+package lu.nyo.excel.renderer;
 
 
-import nnyo.excel.renderer.cursor.CursorPosition;
-import nnyo.excel.renderer.excel_element.Table;
-import nnyo.excel.renderer.excel_element_handlers.TableExcelElementHandler;
+import lu.nyo.excel.renderer.cursor.CursorPosition;
+import lu.nyo.excel.renderer.excel_element.Table;
+import lu.nyo.excel.renderer.excel_element_handlers.TableExcelElementHandler;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,7 +30,7 @@ public class ExcelFileGenerator {
                                 String css,
                                 OutputStream outputStream) {
 
-        try (SXSSFWorkbook workbook = new SXSSFWorkbook()) {
+        try (SXSSFWorkbook workbook = new SXSSFWorkbook(25)) {
             final CellStyleProcessor cellStyleProcessor = CellStyleProcessor.init(css, workbook);
             workbook.setCompressTempFiles(true);
             rendereableObjectsPerSheet.forEach((key, value) -> {
@@ -41,10 +42,29 @@ public class ExcelFileGenerator {
                     Object excelElementToHandle = excelElementPerSheet.next();
                     STRATEGIES_MAP.get(Table.class).handle(cursorPosition, excelElementToHandle, xssfSheet, cellStyleProcessor);
                     excelElementPerSheet.remove();
+                    flushRows(xssfSheet);
                 }
+                flushBufferedData(xssfSheet);
             });
             workbook.write(outputStream);
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void flushRows(SXSSFSheet sheet) {
+        try {
+            sheet.flushRows();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void flushBufferedData(SXSSFSheet sxssfSheet) {
+        try {
+            sxssfSheet.flushBufferedData();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

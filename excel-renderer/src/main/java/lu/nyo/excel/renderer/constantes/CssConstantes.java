@@ -1,4 +1,4 @@
-package nnyo.excel.renderer.constantes;
+package lu.nyo.excel.renderer.constantes;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 

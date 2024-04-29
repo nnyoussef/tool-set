@@ -1,4 +1,4 @@
-package nnyo.excel.renderer.cursor;
+package lu.nyo.excel.renderer.cursor;
 
 import org.apache.poi.ss.util.CellRangeAddress;
 
@@ -28,7 +28,7 @@ public class CursorPositionManager {
         cursorPosition.incrementPosition(0, colSpan);
     }
 
-    public void integrateNewlyAddedCellsToTheCurrentLastNode() {
+    private void integrateNewlyAddedCellsToTheCurrentLastNode() {
         CellRangeAddressNode visited = first;
         CellRangeAddressNode hold = null;
         for (CellRangeAddress cellAddresses : newlyAddedCellsToCurrentSelectedRow) {
