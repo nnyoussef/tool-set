@@ -8,7 +8,6 @@ public class CursorPosition {
     public int getRowPosition() {
         return rowPosition;
     }
-
     public int getCellPosition() {
         return cellPosition;
     }

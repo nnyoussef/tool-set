@@ -141,9 +141,6 @@ public class ExcelFileGeneratorTest {
         LinkedHashMap<String, LinkedList<Object>> data = new LinkedHashMap<>();
 
         data.put("Sheet 1 - Test", DataGenerator.simpleTableFormatData());
-        data.put("Sheet 2 - Test", DataGenerator.simpleTableFormatData());
-        data.put("Sheet 3 - Test", DataGenerator.simpleTableFormatData());
-        data.put("Sheet 4 - Test", DataGenerator.simpleTableFormatData());
 
         final long start = System.nanoTime();
         ExcelFileGenerator.generate(data, Utils.getTestCss(), Utils.getOutputStream("testRowSpanResolutionSimpleTableFormat13"));

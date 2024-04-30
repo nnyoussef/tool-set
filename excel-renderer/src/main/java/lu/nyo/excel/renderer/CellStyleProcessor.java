@@ -51,7 +51,6 @@ public class CellStyleProcessor {
     //-------------------------- Init One Time - Public Usage -------------------------------------------------
     public static CellStyleProcessor init(String css,
                                           SXSSFWorkbook xssfWorkbook) throws IOException {
-
         final Map<String, Map<String, String>> cssRuleDeclaration = new HashMap<>(30);
 
         final InputSource inputSource = new InputSource(new StringReader(css));
@@ -91,6 +90,7 @@ public class CellStyleProcessor {
         }
 
         final XSSFCellStyle xssfCellStyle = (XSSFCellStyle) this.xssfWorkbook.createCellStyle();
+
         final Map<String, String> cssProperties = this.cssRuleDeclaration.getOrDefault(css.trim().strip(), CssConstantes.DEFAULT_CSS_PROPERTIES);
 
         createBorderFromCssInstructions(cssProperties, xssfCellStyle);

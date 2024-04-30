@@ -31,6 +31,7 @@ public class ExcelFileGenerator {
                                 OutputStream outputStream) {
 
         try (SXSSFWorkbook workbook = new SXSSFWorkbook(25)) {
+
             final CellStyleProcessor cellStyleProcessor = CellStyleProcessor.init(css, workbook);
             workbook.setCompressTempFiles(true);
             rendereableObjectsPerSheet.forEach((key, value) -> {

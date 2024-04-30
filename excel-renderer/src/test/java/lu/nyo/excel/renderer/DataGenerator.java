@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toCollection;
 
 public class DataGenerator {
     private static final int ROWS_COUNT_IN_BODY = 200_000;
-    private static final int CELL_LIST_MULTIPLIER = 2;
+    private static final int CELL_LIST_MULTIPLIER = 10;
 
     public static LinkedList<Object> simpleTableFormatData() {
 
