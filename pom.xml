@@ -12,15 +12,16 @@
         <maven.compiler.source>21</maven.compiler.source>
     </properties>
     <modules>
-        <module>function-runner</module>
-        <module>app-dependency-management</module>
-        <module>utils</module>
-        <module>springboot-application-properties-js</module>
-        <module>app-dependency-management/app-starter</module>
-        <module>app-dependency-management/data-starter</module>
-        <module>app-dependency-management/test-starter</module>
+        <module>core/function-runner</module>
+        <module>core/app-dependency-management</module>
+        <module>core/utils</module>
+        <module>core/springboot-application-properties-js</module>
+        <module>core/app-dependency-management/app-starter</module>
+        <module>core/app-dependency-management/data-starter</module>
+        <module>core/app-dependency-management/test-starter</module>
         <module>springboot-application-starter</module>
         <module>excel-renderer</module>
+        <module>core</module>
     </modules>
 
     <build>

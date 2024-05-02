@@ -6,14 +6,15 @@ import lu.nyo.excel.renderer.excel_element.Table;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.IntStream.range;
 
 public class DataGenerator {
-    private static final int ROWS_COUNT_IN_BODY = 200_000;
+    private static final int ROWS_COUNT_IN_BODY_PER_TABLE = 200_000;
     private static final int CELL_LIST_MULTIPLIER = 10;
+    private static final int TABLES_COUNT = 5;
 
     public static LinkedList<Object> simpleTableFormatData() {
 
@@ -29,16 +30,15 @@ public class DataGenerator {
         headerRow.add(new Row().setCells(asList(year, empty)));
         headerRow.add(new Row().setCells(asList(y1, y2, y3, y4, y1, y2, y3, y4)));
 
-        final List<Row> body = IntStream.range(0, ROWS_COUNT_IN_BODY)
-                .mapToObj(i -> {
-                    Cell data1 = new Cell().setData(100000);
-                    Cell data2 = new Cell().setData(100000).setColSpan(2);
-                    List<Cell> cells = new LinkedList<>();
 
-                    for (int x = 0; x < CELL_LIST_MULTIPLIER; x += 1)
-                        cells.addAll(asList(data1, data1, data1, data1, data2, data1, data1, data1, data1));
-                    return new Row().setCells(cells);
-                }).collect(toCollection(LinkedList::new));
+        Cell data1 = new Cell().setData(100000);
+        Cell data2 = new Cell().setData(100000).setColSpan(2);
+        List<Cell> cells = new LinkedList<>();
+        for (int x = 0; x < CELL_LIST_MULTIPLIER; x += 1)
+            cells.addAll(asList(data1, data1, data1, data1, data2, data1, data1, data1, data1));
+        Row row = new Row().setCells(cells);
+
+        final List<Row> body = range(0, ROWS_COUNT_IN_BODY_PER_TABLE).mapToObj(i -> row).collect(toCollection(LinkedList::new));
 
         final List<Row> footerRow = new LinkedList<>();
         final Cell t1 = new Cell().setData("2020");
@@ -49,7 +49,7 @@ public class DataGenerator {
         footerRow.add(new Row().setCells(asList(t1, t2, t3, t4, t5, t1, t2, t3, t4)));
 
         LinkedList<Object> tables = new LinkedList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < TABLES_COUNT; i++) {
             final Table table = (header, body1, footer) -> {
                 header.set(new LinkedList<>(headerRow).stream());
                 body1.set(new LinkedList<>(body).stream());
