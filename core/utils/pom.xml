@@ -8,6 +8,7 @@
     </parent>
     <artifactId>utils</artifactId>
     <name>Utils</name>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>

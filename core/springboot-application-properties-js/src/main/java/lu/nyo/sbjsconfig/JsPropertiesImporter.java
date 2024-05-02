@@ -46,7 +46,7 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
 
     private static final String APPLICATION_PROPERTIES_FILE_NAME = "application.js";
 
-    private static final String PROPERTY_SOURCE_NAME = "application.js.properties";
+    private static final String PROPERTY_SOURCE_NAME = "application";
 
     private static final TypeLiteral<Map<String, Object>> TYPE_LITERAL = new TypeLiteral<>() {
     };
