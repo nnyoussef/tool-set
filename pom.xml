@@ -22,6 +22,7 @@
         <module>springboot-application-starter</module>
         <module>excel-renderer</module>
         <module>core</module>
+        <module>workflow-api</module>
     </modules>
 
     <build>

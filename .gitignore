@@ -21,6 +21,7 @@ target/
 **/*.ipr
 /excel-renderer/generated/*
 .idea
+.idea/workspace.xml
 
 ### Eclipse ###
 .apt_generated
