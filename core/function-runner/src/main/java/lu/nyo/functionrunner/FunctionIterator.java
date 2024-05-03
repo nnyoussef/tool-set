@@ -13,14 +13,14 @@ public abstract class FunctionIterator {
         handleReportedException(context, executionUnitOutput, exception);
     }
 
-    protected abstract void handleReportedOutput(Context context,
+    public abstract void handleReportedOutput(Context context,
                                                  ExecutionUnitOutput executionUnitOutput);
 
-    protected abstract void handleReportedException(Context context,
+    public abstract void handleReportedException(Context context,
                                                     ExecutionUnitOutput executionUnitOutput,
                                                     Exception exception);
 
-    protected abstract boolean hasNext();
+    public abstract boolean hasNext();
 
-    protected abstract FunctionExecutionUnit<Object> next();
+    public abstract FunctionExecutionUnit<Object> next();
 }

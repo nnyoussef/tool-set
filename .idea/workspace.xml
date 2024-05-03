@@ -11,21 +11,10 @@
     </loaded-modules>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="Adding Some Updates some predefined FunctionsRunners and factories">
+    <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="Optimization Excel Render with SXSSF + Minor Correction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/FunctionsRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/FunctionsRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/dto/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/ExecutionUnitOutput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/enums/PostAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/enums/PostAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/interfaces/ExecutionUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/interfaces/ExecutionUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/interfaces/FunctionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/interfaces/FunctionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/main/java/lu/nyo/functionrunner/predefined/functionfactories/SBFunctionFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/FunctionsRunnerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/FunctionsRunnerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test1.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test1UnrecognizedPostAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test1UnrecognizedPostAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test2.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test2Stop.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test2Stop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test3.java" beforeDir="false" afterPath="$PROJECT_DIR$/function-runner/src/test/java/lu/nyo/functionrunner/functions/Test3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-flux-starter/src/main/java/lu/nyo/webfluxstarter/DynamicRouterConfigs.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-flux-starter/src/main/java/lu/nyo/webfluxstarter/DynamicRouterConfigs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionExecutionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionIterator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +44,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "JUnit.FunctionChainerRunnerTest.executor": "Run",
     "JUnit.FunctionChainerRunnerTest.functionChaninerDefaultConstructorAccessTest.executor": "Run",
     "JUnit.FunctionChainerRunnerTest.test1.executor": "Run",
@@ -104,12 +94,20 @@
       <recent name="lu.nyo.functionrunner" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lu.nyo.functionrunner.impl" />
       <recent name="lu.nyo.functionrunner.functions" />
       <recent name="lu.nyo.functionrunner.predefined.executionunits" />
       <recent name="lu.nyo.functionchainer.fs" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="function-runner" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FunctionsRunnerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage">
         <pattern>
@@ -121,22 +119,6 @@
       <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FunctionsRunnerTest.functionChaninerDefaultConstructorAccessTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="function-chainer" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lu.nyo.functionrunner.interfaces.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
-      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
-      <option name="METHOD_NAME" value="functionChaninerDefaultConstructorAccessTest" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -202,13 +184,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.FunctionsRunnerTest" />
+      <item itemvalue="JUnit.FunctionsRunnerTest.test4" />
+      <item itemvalue="JUnit.FunctionsRunnerTest.test5" />
+      <item itemvalue="JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException" />
         <item itemvalue="JUnit.FunctionsRunnerTest.test5" />
         <item itemvalue="JUnit.FunctionsRunnerTest.test4" />
         <item itemvalue="JUnit.FunctionsRunnerTest" />
-        <item itemvalue="JUnit.FunctionsRunnerTest.functionChaninerDefaultConstructorAccessTest" />
       </list>
     </recent_temporary>
   </component>
@@ -245,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708467911553</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Optimization Excel Render with SXSSF + Minor Correction">
+      <option name="closed" value="true" />
+      <created>1714723724196</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714723724196</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +250,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding Some Updates some predefined FunctionsRunners and factories" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Some Updates some predefined FunctionsRunners and factories" />
+    <MESSAGE value="Optimization Excel Render with SXSSF + Minor Correction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimization Excel Render with SXSSF + Minor Correction" />
   </component>
 </project>
