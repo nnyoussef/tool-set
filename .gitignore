@@ -4,13 +4,23 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
+
 .idea/libraries/
 *.iws
 *.iml
 *.ipr
+.idea/**.xml
+.idea/encodings.xml
+
+**/.idea/modules.xml
+**/.idea/jarRepositories.xml
+**/.idea/compiler.xml
+**/.idea/libraries/
+**/*.iws
+**/*.iml
+**/*.ipr
+/excel-renderer/generated/*
+.idea
 
 ### Eclipse ###
 .apt_generated

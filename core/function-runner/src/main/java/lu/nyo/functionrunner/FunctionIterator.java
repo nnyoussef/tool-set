@@ -1,8 +1,6 @@
 package lu.nyo.functionrunner;
 
-import java.util.Iterator;
-
-public abstract class FunctionManager implements Iterator<FunctionExecutionUnit<Object>> {
+public abstract class FunctionIterator {
 
     public final void reportIntermediateResults(Context context,
                                                 ExecutionUnitOutput executionUnitOutput) {
@@ -21,4 +19,8 @@ public abstract class FunctionManager implements Iterator<FunctionExecutionUnit<
     protected abstract void handleReportedException(Context context,
                                                     ExecutionUnitOutput executionUnitOutput,
                                                     Exception exception);
+
+    protected abstract boolean hasNext();
+
+    protected abstract FunctionExecutionUnit<Object> next();
 }

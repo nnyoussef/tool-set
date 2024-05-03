@@ -4,7 +4,7 @@ package lu.nyo.functionrunner;
 import org.junit.jupiter.api.Test;
 
 public class FunctionControllerTest {
-    FunctionManager functionManager = new FunctionManager() {
+    FunctionIterator functionIterator = new FunctionIterator() {
         @Override
         protected void handleReportedOutput(Context context, ExecutionUnitOutput executionUnitOutput) {
 
