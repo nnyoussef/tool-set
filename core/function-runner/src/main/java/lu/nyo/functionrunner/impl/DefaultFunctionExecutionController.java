@@ -17,7 +17,7 @@ public class DefaultFunctionExecutionController implements FunctionExecutionCont
     @Override
     public <T> T apply(Object... arguments) {
 
-        final Context context = ((Context) arguments[0]);
+        final Context context = (Context) arguments[0];
         final FunctionIterator functionIterator = ((FunctionIterator) arguments[1]);
         final Function<Object, T> outputConvertionFunction = ((Function<Object, T>) arguments[2]);
         final ImmutableMap<String, Object> args = (ImmutableMap<String, Object>) arguments[3];
@@ -48,7 +48,10 @@ public class DefaultFunctionExecutionController implements FunctionExecutionCont
     }
 
     @Override
-    public String getInstanceId() {
-        return getClass().getName();
+    public <T> T apply(Context context,
+                       FunctionIterator functionIterator,
+                       ImmutableMap<String, Object> args) {
+        return apply(context, functionIterator, null, args);
     }
+
 }
