@@ -3,9 +3,21 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/function-chainer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/function-runner/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-reactor-extra-tools/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-reactor-extra-tools/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service-composer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service-composer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springboot-reactive-extension/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springboot-reactive-extension/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springboot-service-composer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springboot-service-composer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/web-flux-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/web-flux-starter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web-server-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web-server-starter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/workflow-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/workflow-api/src/main/resources" charset="UTF-8" />
   </component>
 </project>

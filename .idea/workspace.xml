@@ -5,16 +5,72 @@
   </component>
   <component name="AutomaticModuleUnloader">
     <loaded-modules>
-      <module name="function-chainer" />
-      <module name="tool_set" />
+      <module name="test-starter" />
+      <module name="springboot-application-properties-js" />
       <module name="core" />
+      <module name="data-starter" />
+      <module name="utils" />
+      <module name="app-dependency-management" />
+      <module name="tool-set" />
+      <module name="excel-renderer" />
+      <module name="springboot-application-starter" />
+      <module name="app-starter" />
     </loaded-modules>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="Optimization Excel Render with SXSSF + Minor Correction">
+    <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="Init of Springboot Service Composer">
+      <change afterPath="$PROJECT_DIR$/web-server-starter/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-server-starter/src/main/java/fr/nyo/web/server/starter/WebAppStaticResourceServerConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-server-starter/src/main/java/fr/nyo/web/server/starter/WebAppStaticResourceServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app-dependency-management/app-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-dependency-management/app-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app-dependency-management/data-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-dependency-management/data-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app-dependency-management/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-dependency-management/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app-dependency-management/test-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-dependency-management/test-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/Context.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/ExecutionUnitOutput.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionExecutionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionExecutionUnit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionIterator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/impl/DefaultFunctionExecutionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/resources/META-INF/services/lu.nyo.functionrunner.FunctionExecutionController" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/test/java/lu/nyo/functionrunner/ExecutionUnit1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/function-runner/src/test/java/lu/nyo/functionrunner/FunctionControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-application-properties-js/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/main/java/lu/nyo/sbjsconfig/JsPropertiesImporter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/main/java/lu/nyo/sbjsconfig/Plugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-application-properties-js/src/main/java/lu/nyo/sbjsconfig/Plugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/main/resources/META-INF/spring.factories" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/test/java/lu/nyo/sbjsconfig/JsPropertiesImporter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/test/java/lu/nyo/sbjsconfig/Plugin1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/test/resources/META-INF/services/lu.nyo.sbjsconfig.Plugin" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-application-properties-js/src/test/resources/META-INF/services/lu.nyo.sbjsconfig.Plugin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/utils/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/utils/src/main/java/lu/nyo/utils/ExtraMapUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/src/main/java/lu/nyo/utils/ExtraMapUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/generated/simpleTableFormatTest.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/generated/spanResolutionSimpleTableFormatTest.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/CellStyleProcessor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/ExcelElementRenderer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/ExcelFileGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/constantes/CssConstantes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/cursor/CursorPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/cursor/CursorPositionManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/excel_element/Cell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/excel_element/Row.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/excel_element/Table.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/excel_element_handlers/TableExcelElementHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/utils/CellDataUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/utils/SpanUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/test/java/lu/nyo/excel/renderer/DataGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/test/java/lu/nyo/excel/renderer/ExcelFileGeneratorTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/test/java/lu/nyo/excel/renderer/Utils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel-renderer/src/test/resources/test.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-application-starter/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-service-composer/pom.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +89,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nnyoussef&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nnyoussef/tool-set.git&quot;,
+    &quot;accountId&quot;: &quot;e16c645f-7b5a-400c-8903-3daaf0de33c0&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -44,15 +118,25 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Launcher.executor": "Run",
     "Application.Main.executor": "Run",
+    "Application.SpringBootWithJsPropertiesApplicationTest.executor": "Run",
+    "Application.fr.nyo.Main.executor": "Run",
+    "Application.lu.nyo.Main.executor": "Run",
+    "Application.lu.nyo.sbjsconfig.Main.executor": "Run",
+    "JUnit.ExcelFileGeneratorTest.executor": "Run",
     "JUnit.FunctionChainerRunnerTest.executor": "Run",
     "JUnit.FunctionChainerRunnerTest.functionChaninerDefaultConstructorAccessTest.executor": "Run",
     "JUnit.FunctionChainerRunnerTest.test1.executor": "Run",
     "JUnit.FunctionsRunnerTest.test4.executor": "Run",
     "JUnit.FunctionsRunnerTest.test5.executor": "Run",
     "JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException.executor": "Run",
+    "JUnit.SpringBootPropertiesFromJsTests.executor": "Run",
+    "JUnit.SpringBootWithJsPropertiesApplicationTest.executor": "Run",
     "JUnit.WebFluxTest.testContext.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.app-starter [compile].executor": "Run",
+    "Maven.app-starter [package].executor": "Run",
     "Maven.core [clean].executor": "Run",
     "Maven.core [compile].executor": "Run",
     "Maven.core [install].executor": "Run",
@@ -66,6 +150,11 @@
     "Maven.function-runner [clean].executor": "Run",
     "Maven.function-runner [install].executor": "Run",
     "Maven.function-runner [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
+    "Maven.springboot-application-properties-js [test].executor": "Run",
+    "Maven.tool-set [clean].executor": "Run",
+    "Maven.tool-set [compile].executor": "Run",
+    "Maven.tool-set [install].executor": "Run",
+    "Maven.web-server-starter [compile].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -73,7 +162,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/nassi/AquaProjects/appdeployer",
+    "last_opened_file_path": "C:/Users/nassi/AquaProjects/tool-set/springboot-application-properties-js/src/test/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -82,91 +171,101 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="fr.nyo.workflow.api.procedure" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nassi\AquaProjects\tool-set\springboot-application-properties-js\src\test\resources" />
+      <recent name="C:\Users\nassi\AquaProjects\tool-set\springboot-application-properties-js\src\main\resources" />
+      <recent name="C:\Users\nassi\AquaProjects\tool-set\web-server-starter\src\main\resources" />
+      <recent name="C:\Users\nassi\AquaProjects\tool-set\web-server-starter\src\main\java\fr\nyo\web\server\starter" />
       <recent name="C:\Users\nassi\AquaProjects\core\web-flux-starter\src\main" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nassi\AquaProjects\tool-set" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="lu.nyo.functionrunner" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lu.nyo.utils" />
       <recent name="lu.nyo.functionrunner.impl" />
       <recent name="lu.nyo.functionrunner.functions" />
       <recent name="lu.nyo.functionrunner.predefined.executionunits" />
       <recent name="lu.nyo.functionchainer.fs" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.SpringBootPropertiesFromJsTests">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="function-runner" />
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.sbjsconfig.Main" />
+      <module name="springboot-application-properties-js" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lu.nyo.sbjsconfig.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FunctionsRunnerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SpringBootWithJsPropertiesApplicationTests" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.sbjsconfig.SpringBootWithJsPropertiesApplicationTests" />
+      <module name="springboot-application-properties-js" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lu.nyo.functionrunner.interfaces.*" />
+          <option name="PATTERN" value="lu.nyo.sbjsconfig.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
-      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
-      <option name="METHOD_NAME" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lu.nyo.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.Main" />
+      <module name="project-reactor-extra-tools" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lu.nyo.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringBootPropertiesFromJsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-application-properties-js" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lu.nyo.sbjsconfig.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lu.nyo.sbjsconfig" />
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.sbjsconfig.SpringBootPropertiesFromJsTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FunctionsRunnerTest.test4" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="function-runner" />
+    <configuration name="SpringBootWithJsPropertiesApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-application-properties-js" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lu.nyo.functionrunner.*" />
+          <option name="PATTERN" value="lu.nyo.sbjsconfig.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
-      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
-      <option name="METHOD_NAME" value="test4" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FunctionsRunnerTest.test5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="function-runner" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lu.nyo.functionrunner.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
-      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
-      <option name="METHOD_NAME" value="test5" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FunctionsRunnerTest.testExecutionUnitFunctionSelectorException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="function-runner" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lu.nyo.functionrunner.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="lu.nyo.functionrunner" />
-      <option name="MAIN_CLASS_NAME" value="lu.nyo.functionrunner.FunctionsRunnerTest" />
-      <option name="METHOD_NAME" value="testExecutionUnitFunctionSelectorException" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="lu.nyo.sbjsconfig" />
+      <option name="MAIN_CLASS_NAME" value="lu.nyo.sbjsconfig.SpringBootWithJsPropertiesApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -185,19 +284,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.FunctionsRunnerTest" />
-      <item itemvalue="JUnit.FunctionsRunnerTest.test4" />
-      <item itemvalue="JUnit.FunctionsRunnerTest.test5" />
-      <item itemvalue="JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException" />
+      <item itemvalue="Application.SpringBootWithJsPropertiesApplicationTests" />
+      <item itemvalue="Application.lu.nyo.sbjsconfig.Main" />
+      <item itemvalue="Application.lu.nyo.Main" />
+      <item itemvalue="JUnit.SpringBootPropertiesFromJsTests" />
+      <item itemvalue="JUnit.SpringBootWithJsPropertiesApplicationTests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException" />
-        <item itemvalue="JUnit.FunctionsRunnerTest.test5" />
-        <item itemvalue="JUnit.FunctionsRunnerTest.test4" />
-        <item itemvalue="JUnit.FunctionsRunnerTest" />
+        <item itemvalue="JUnit.SpringBootPropertiesFromJsTests" />
+        <item itemvalue="Application.SpringBootWithJsPropertiesApplicationTests" />
+        <item itemvalue="JUnit.SpringBootWithJsPropertiesApplicationTests" />
+        <item itemvalue="Application.lu.nyo.sbjsconfig.Main" />
+        <item itemvalue="Application.lu.nyo.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -242,15 +341,52 @@
       <option name="project" value="LOCAL" />
       <updated>1714723724196</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Reorgnization">
+      <option name="closed" value="true" />
+      <created>1714771046360</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714771046360</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Init of Workflow API">
+      <option name="closed" value="true" />
+      <created>1714771333190</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714771333190</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Init of Springboot Service Composer">
+      <created>1718399691348</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718399691348</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding Some Updates some predefined FunctionsRunners and factories" />
     <MESSAGE value="Optimization Excel Render with SXSSF + Minor Correction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimization Excel Render with SXSSF + Minor Correction" />
+    <MESSAGE value="Reorgnization" />
+    <MESSAGE value="Init of Workflow API" />
+    <MESSAGE value="Init of Springboot Service Composer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Init of Springboot Service Composer" />
   </component>
 </project>
