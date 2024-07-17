@@ -20,12 +20,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="Restructuring toolset + Static Resource Server Endpoint">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-dependency-management/test-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-dependency-management/test-starter/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot-application-properties-js/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-application-properties-js/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-application-properties-js/src/test/java/lu/nyo/sbjsconfig/Plugin1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-application-properties-js/src/test/java/lu/nyo/sbjsconfig/SpringBootWithJsPropertiesApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-application-properties-js/src/test/resources/META-INF/services/lu.nyo.sbjsconfig.Plugin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-application-properties-js/src/test/resources/application.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server-starter/src/main/java/fr/nyo/web/server/starter/WebAppStaticResourceServerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-server-starter/src/main/java/fr/nyo/web/server/starter/WebAppStaticResourceServerConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server-starter/src/main/java/fr/nyo/web/server/starter/WebAppStaticResourceServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-server-starter/src/main/java/fr/nyo/web/server/starter/WebAppStaticResourceServerController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,65 +68,65 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Launcher.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.SpringBootWithJsPropertiesApplicationTest.executor": "Run",
-    "Application.fr.nyo.Main.executor": "Run",
-    "Application.lu.nyo.Main.executor": "Run",
-    "Application.lu.nyo.sbjsconfig.Main.executor": "Run",
-    "JUnit.ExcelFileGeneratorTest.executor": "Run",
-    "JUnit.FunctionChainerRunnerTest.executor": "Run",
-    "JUnit.FunctionChainerRunnerTest.functionChaninerDefaultConstructorAccessTest.executor": "Run",
-    "JUnit.FunctionChainerRunnerTest.test1.executor": "Run",
-    "JUnit.FunctionsRunnerTest.test4.executor": "Run",
-    "JUnit.FunctionsRunnerTest.test5.executor": "Run",
-    "JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException.executor": "Run",
-    "JUnit.SpringBootPropertiesFromJsTests.executor": "Run",
-    "JUnit.SpringBootWithJsPropertiesApplicationTest.executor": "Run",
-    "JUnit.WebFluxTest.testContext.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.app-starter [compile].executor": "Run",
-    "Maven.app-starter [package].executor": "Run",
-    "Maven.core [clean].executor": "Run",
-    "Maven.core [compile].executor": "Run",
-    "Maven.core [install].executor": "Run",
-    "Maven.core [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
-    "Maven.core [package].executor": "Run",
-    "Maven.core [test].executor": "Run",
-    "Maven.core [verify].executor": "Run",
-    "Maven.function-chainer [org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test].executor": "Run",
-    "Maven.function-chainer [org.jacoco:jacoco-maven-plugin:0.7.7.201606060606:report].executor": "Run",
-    "Maven.function-chainer [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
-    "Maven.function-runner [clean].executor": "Run",
-    "Maven.function-runner [install].executor": "Run",
-    "Maven.function-runner [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
-    "Maven.springboot-application-properties-js [test].executor": "Run",
-    "Maven.tool-set [clean].executor": "Run",
-    "Maven.tool-set [compile].executor": "Run",
-    "Maven.tool-set [install].executor": "Run",
-    "Maven.web-server-starter [compile].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-21",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/nassi/AquaProjects/tool-set/springboot-application-properties-js/src/test/resources/META-INF/services",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SpringBootWithJsPropertiesApplicationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.fr.nyo.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.lu.nyo.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.lu.nyo.sbjsconfig.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ExcelFileGeneratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FunctionChainerRunnerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FunctionChainerRunnerTest.functionChaninerDefaultConstructorAccessTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FunctionChainerRunnerTest.test1.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FunctionsRunnerTest.test4.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FunctionsRunnerTest.test5.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FunctionsRunnerTest.testExecutionUnitFunctionSelectorException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SpringBootPropertiesFromJsTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SpringBootWithJsPropertiesApplicationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WebFluxTest.testContext.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.app-starter [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.app-starter [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [verify].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.function-chainer [org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.function-chainer [org.jacoco:jacoco-maven-plugin:0.7.7.201606060606:report].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.function-chainer [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.function-runner [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.function-runner [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.function-runner [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.springboot-application-properties-js [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tool-set [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tool-set [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tool-set [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.web-server-starter [compile].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nassi/AquaProjects/tool-set/springboot-application-properties-js/src/test/resources/META-INF/services&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="fr.nyo.workflow.api.procedure" />
@@ -240,8 +237,8 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Main" />
       <item itemvalue="Application.SpringBootWithJsPropertiesApplicationTests" />
-      <item itemvalue="Application.lu.nyo.sbjsconfig.Main" />
       <item itemvalue="Application.lu.nyo.Main" />
       <item itemvalue="JUnit.SpringBootPropertiesFromJsTests" />
       <item itemvalue="JUnit.SpringBootWithJsPropertiesApplicationTests" />
@@ -251,7 +248,6 @@
         <item itemvalue="JUnit.SpringBootPropertiesFromJsTests" />
         <item itemvalue="Application.SpringBootWithJsPropertiesApplicationTests" />
         <item itemvalue="JUnit.SpringBootWithJsPropertiesApplicationTests" />
-        <item itemvalue="Application.lu.nyo.sbjsconfig.Main" />
         <item itemvalue="Application.lu.nyo.Main" />
       </list>
     </recent_temporary>
@@ -336,7 +332,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721231996171</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Restructuring toolset + Static Resource Server Endpoint">
+      <option name="closed" value="true" />
+      <created>1721232263962</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1721232263962</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

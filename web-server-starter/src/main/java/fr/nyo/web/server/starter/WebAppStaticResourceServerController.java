@@ -10,6 +10,8 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static reactor.core.scheduler.Schedulers.boundedElastic;
+
 @RestController
 @RequestMapping("/ui")
 public final class WebAppStaticResourceServerController {
@@ -24,11 +26,10 @@ public final class WebAppStaticResourceServerController {
 
     @GetMapping("**")
     public Mono<ResponseEntity<Flux<DataBuffer>>> downloadFile(ServerWebExchange serverWebExchange) {
-        final String requestPath = serverWebExchange.getRequest().getPath().toString();
-        final Mono<ResponseEntity<Flux<DataBuffer>>> response = cache.get(requestPath);
-        if (response != null)
-            return response;
-        else return cache.get(UI_URL_PATH);
+        return Mono.just(serverWebExchange)
+                .map(request -> serverWebExchange.getRequest().getPath().toString())
+                .flatMap(requestPath -> cache.getOrDefault(requestPath, cache.get(UI_URL_PATH)))
+                .subscribeOn(boundedElastic());
     }
 
 }

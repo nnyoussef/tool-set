@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import static java.nio.file.Files.walk;
+import static java.nio.file.Path.of;
 import static java.util.concurrent.TimeUnit.DAYS;
 import static org.springframework.core.io.buffer.DataBufferUtils.read;
 import static org.springframework.http.CacheControl.maxAge;
@@ -29,8 +30,14 @@ import static reactor.core.publisher.Mono.just;
 
 @Configuration
 public class WebAppStaticResourceServerConfiguration {
+
     private static final int DATA_BUFFER_SIZE = 10_048_576;
     private static final DefaultDataBufferFactory dataBufferFactory = new DefaultDataBufferFactory();
+    private static final String INDEX_FILE_NAME = "index.html.br";
+    private static final String UI_URL_PATH = "/ui";
+    private static final String CONTENT_ENCODING = "br";
+    private static final String FILE_TYPE_OF_CONTENT_ENCODING = ".".concat(CONTENT_ENCODING);
+    private static final String UI_BASE_PATH_IN_CLASSPATH = "ui";
 
     private final ImmutableMap.Builder<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache = ImmutableMap.builder();
 
@@ -55,25 +62,24 @@ public class WebAppStaticResourceServerConfiguration {
     }
 
     private void loadAllWebResourcesInCache(Map<String, HttpHeaders> httpHeadersMap) throws IOException {
-        File uiResourcesDir = new ClassPathResource("ui").getFile();
-        try (Stream<Path> pathStream = walk(Path.of(uiResourcesDir.getAbsolutePath()))) {
+        File uiResourcesDir = new ClassPathResource(UI_BASE_PATH_IN_CLASSPATH).getFile();
+        try (Stream<Path> pathStream = walk(of(uiResourcesDir.getAbsolutePath()))) {
             pathStream.filter(Files::isRegularFile)
                     .forEach(filePath -> {
                         final String fileExtension = getFileExtension(filePath.toString());
                         String filePathRelativeToUiFolder = filePath.toString()
                                 .replace(uiResourcesDir.getParent(), "")
                                 .replace("\\", "/")
-                                .replace(".br", "");
+                                .replace(FILE_TYPE_OF_CONTENT_ENCODING, "");
                         final ResponseEntity<Flux<DataBuffer>> responseEntity = ok()
                                 .headers(httpHeadersMap.get(fileExtension))
                                 .body(read(filePath, dataBufferFactory, DATA_BUFFER_SIZE).cache());
                         cache.put(filePathRelativeToUiFolder, just(responseEntity));
-                        if (filePath.endsWith("index.html.br")) {
-                            cache.put("/ui", just(responseEntity));
+                        if (filePath.endsWith(INDEX_FILE_NAME)) {
+                            cache.put(UI_URL_PATH, just(responseEntity));
                         }
                     });
         }
-
     }
 
     private HttpHeaders getHttpHeaders(MediaType mediaType) {
