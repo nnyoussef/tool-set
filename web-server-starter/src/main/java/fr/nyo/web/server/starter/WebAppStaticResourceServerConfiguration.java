@@ -36,7 +36,7 @@ public class WebAppStaticResourceServerConfiguration {
     private static final String INDEX_FILE_NAME = "index.html.br";
     private static final String UI_URL_PATH = "/ui";
     private static final String CONTENT_ENCODING = "br";
-    private static final String FILE_TYPE_OF_CONTENT_ENCODING = ".".concat(CONTENT_ENCODING);
+    private static final String CONTENT_ENCODING_FILE_EXTENSION = ".".concat(CONTENT_ENCODING);
     private static final String UI_BASE_PATH_IN_CLASSPATH = "ui";
 
     private final ImmutableMap.Builder<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache = ImmutableMap.builder();
@@ -67,14 +67,14 @@ public class WebAppStaticResourceServerConfiguration {
             pathStream.filter(Files::isRegularFile)
                     .forEach(filePath -> {
                         final String fileExtension = getFileExtension(filePath.toString());
-                        String filePathRelativeToUiFolder = filePath.toString()
+                        String filePathWithUiFolderAsParent = filePath.toString()
                                 .replace(uiResourcesDir.getParent(), "")
                                 .replace("\\", "/")
-                                .replace(FILE_TYPE_OF_CONTENT_ENCODING, "");
+                                .replace(CONTENT_ENCODING_FILE_EXTENSION, "");
                         final ResponseEntity<Flux<DataBuffer>> responseEntity = ok()
                                 .headers(httpHeadersMap.get(fileExtension))
                                 .body(read(filePath, dataBufferFactory, DATA_BUFFER_SIZE).cache());
-                        cache.put(filePathRelativeToUiFolder, just(responseEntity));
+                        cache.put(filePathWithUiFolderAsParent, just(responseEntity));
                         if (filePath.endsWith(INDEX_FILE_NAME)) {
                             cache.put(UI_URL_PATH, just(responseEntity));
                         }
