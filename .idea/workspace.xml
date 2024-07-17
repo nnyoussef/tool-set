@@ -18,59 +18,8 @@
     </loaded-modules>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="Init of Springboot Service Composer">
-      <change afterPath="$PROJECT_DIR$/web-server-starter/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-server-starter/src/main/java/fr/nyo/web/server/starter/WebAppStaticResourceServerConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-server-starter/src/main/java/fr/nyo/web/server/starter/WebAppStaticResourceServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app-dependency-management/app-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-dependency-management/app-starter/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app-dependency-management/data-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-dependency-management/data-starter/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app-dependency-management/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-dependency-management/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app-dependency-management/test-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-dependency-management/test-starter/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/Context.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/ExecutionUnitOutput.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionExecutionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionExecutionUnit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/FunctionIterator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/java/lu/nyo/functionrunner/impl/DefaultFunctionExecutionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/main/resources/META-INF/services/lu.nyo.functionrunner.FunctionExecutionController" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/test/java/lu/nyo/functionrunner/ExecutionUnit1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/function-runner/src/test/java/lu/nyo/functionrunner/FunctionControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-application-properties-js/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/main/java/lu/nyo/sbjsconfig/JsPropertiesImporter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/main/java/lu/nyo/sbjsconfig/Plugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-application-properties-js/src/main/java/lu/nyo/sbjsconfig/Plugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/main/resources/META-INF/spring.factories" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/test/java/lu/nyo/sbjsconfig/JsPropertiesImporter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/test/java/lu/nyo/sbjsconfig/Plugin1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/springboot-application-properties-js/src/test/resources/META-INF/services/lu.nyo.sbjsconfig.Plugin" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-application-properties-js/src/test/resources/META-INF/services/lu.nyo.sbjsconfig.Plugin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/utils/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/utils/src/main/java/lu/nyo/utils/ExtraMapUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/src/main/java/lu/nyo/utils/ExtraMapUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/generated/simpleTableFormatTest.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/generated/spanResolutionSimpleTableFormatTest.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/CellStyleProcessor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/ExcelElementRenderer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/ExcelFileGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/constantes/CssConstantes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/cursor/CursorPosition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/cursor/CursorPositionManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/excel_element/Cell.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/excel_element/Row.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/excel_element/Table.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/excel_element_handlers/TableExcelElementHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/utils/CellDataUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/main/java/lu/nyo/excel/renderer/utils/SpanUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/test/java/lu/nyo/excel/renderer/DataGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/test/java/lu/nyo/excel/renderer/ExcelFileGeneratorTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/test/java/lu/nyo/excel/renderer/Utils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel-renderer/src/test/resources/test.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-application-starter/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-service-composer/pom.xml" beforeDir="false" />
+    <list default="true" id="cc2be6b6-37cf-4d2b-958c-410ac636646a" name="Changes" comment="Restructuring toolset + Static Resource Server Endpoint">
+      <change beforePath="$PROJECT_DIR$/springboot-application-properties-js/src/main/java/lu/nyo/sbjsconfig/JsPropertiesImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-application-properties-js/src/main/java/lu/nyo/sbjsconfig/JsPropertiesImporter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,7 +313,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718399691348</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Restructuring toolset + Static Resource Server Endpoint">
+      <option name="closed" value="true" />
+      <created>1721231983208</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1721231983208</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,6 +344,7 @@
     <MESSAGE value="Reorgnization" />
     <MESSAGE value="Init of Workflow API" />
     <MESSAGE value="Init of Springboot Service Composer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init of Springboot Service Composer" />
+    <MESSAGE value="Restructuring toolset + Static Resource Server Endpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="Restructuring toolset + Static Resource Server Endpoint" />
   </component>
 </project>

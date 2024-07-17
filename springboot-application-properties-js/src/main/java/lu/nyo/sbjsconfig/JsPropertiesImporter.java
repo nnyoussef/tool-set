@@ -103,7 +103,6 @@ public final class JsPropertiesImporter implements ApplicationListener<Applicati
     }
 
     private static Source createSource(URL jsConfigPath) throws IOException {
-        System.out.println(jsConfigPath);
         return newBuilder(LANG_JS, jsConfigPath).build();
     }
 
