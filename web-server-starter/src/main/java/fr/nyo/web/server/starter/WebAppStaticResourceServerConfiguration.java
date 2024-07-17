@@ -16,12 +16,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.Map;
 import java.util.stream.Stream;
 
 import static java.nio.file.Files.walk;
 import static java.nio.file.Path.of;
-import static java.util.concurrent.TimeUnit.DAYS;
 import static org.springframework.core.io.buffer.DataBufferUtils.read;
 import static org.springframework.http.CacheControl.maxAge;
 import static org.springframework.http.MediaType.*;
@@ -38,6 +38,7 @@ public class WebAppStaticResourceServerConfiguration {
     private static final String CONTENT_ENCODING = "br";
     private static final String CONTENT_ENCODING_FILE_EXTENSION = ".".concat(CONTENT_ENCODING);
     private static final String UI_BASE_PATH_IN_CLASSPATH = "ui";
+    private static final Duration CACHE_CONTROL_DURATION = Duration.ofDays(365);
 
     private final ImmutableMap.Builder<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache = ImmutableMap.builder();
 
@@ -85,8 +86,8 @@ public class WebAppStaticResourceServerConfiguration {
     private HttpHeaders getHttpHeaders(MediaType mediaType) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(mediaType);
-        headers.set("Content-Encoding", "br");
-        headers.setCacheControl(maxAge(365, DAYS));
+        headers.set("Content-Encoding", CONTENT_ENCODING);
+        headers.setCacheControl(maxAge(CACHE_CONTROL_DURATION));
         return headers;
     }
 
