@@ -32,7 +32,7 @@ import static reactor.core.publisher.Mono.just;
 public class WebAppStaticResourceServerConfiguration {
 
     private static final int DATA_BUFFER_SIZE = 10_048_576;
-    private static final DefaultDataBufferFactory dataBufferFactory = new DefaultDataBufferFactory();
+    private static final DefaultDataBufferFactory DATA_BUFFER_FACTORY = new DefaultDataBufferFactory();
     private static final String INDEX_FILE_NAME = "index.html.br";
     private static final String UI_URL_PATH = "/ui";
     private static final String CONTENT_ENCODING = "br";
@@ -73,7 +73,7 @@ public class WebAppStaticResourceServerConfiguration {
                                 .replace(CONTENT_ENCODING_FILE_EXTENSION, "");
                         final ResponseEntity<Flux<DataBuffer>> responseEntity = ok()
                                 .headers(httpHeadersMap.get(fileExtension))
-                                .body(read(filePath, dataBufferFactory, DATA_BUFFER_SIZE).cache());
+                                .body(read(filePath, DATA_BUFFER_FACTORY, DATA_BUFFER_SIZE).cache());
                         cache.put(filePathWithUiFolderAsParent, just(responseEntity));
                         if (filePath.endsWith(INDEX_FILE_NAME)) {
                             cache.put(UI_URL_PATH, just(responseEntity));
