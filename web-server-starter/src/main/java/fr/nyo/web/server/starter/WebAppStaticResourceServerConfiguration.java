@@ -36,14 +36,13 @@ public class WebAppStaticResourceServerConfiguration {
     private static final String INDEX_FILE_NAME = "index.html.br";
     private static final String UI_URL_PATH = "/ui";
     private static final String CONTENT_ENCODING = "br";
-    private static final String CONTENT_ENCODING_FILE_EXTENSION = ".".concat(CONTENT_ENCODING);
+    private static final String FILE_TYPE_OF_CONTENT_ENCODING = ".".concat(CONTENT_ENCODING);
     private static final String UI_BASE_PATH_IN_CLASSPATH = "ui";
-    private static final Duration CACHE_CONTROL_DURATION = Duration.ofDays(365);
+    private static final ImmutableMap.Builder<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache = ImmutableMap.builder();
+    private static final Duration CACHE_CONTROL_MAX_AGE = Duration.ofDays(365);
 
-    private final ImmutableMap.Builder<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache = ImmutableMap.builder();
-
-    @Bean()
-    public WebAppStaticResourceServerController provideWebAppStaticResourceServerController() throws IOException {
+    @Bean
+    public StaticResourceCache provideWebApplicationStaticResourcesCache() throws IOException {
         Map<String, HttpHeaders> httpHeadersMap = ImmutableMap.<String, HttpHeaders>builder()
                 .put("html", getHttpHeaders(TEXT_HTML))
                 .put("js", getHttpHeaders(parseMediaType("text/javascript")))
@@ -59,7 +58,7 @@ public class WebAppStaticResourceServerConfiguration {
                 .put("css", getHttpHeaders(parseMediaType("text/css")))
                 .build();
         loadAllWebResourcesInCache(httpHeadersMap);
-        return new WebAppStaticResourceServerController(cache.build());
+        return new StaticResourceCache(cache.build());
     }
 
     private void loadAllWebResourcesInCache(Map<String, HttpHeaders> httpHeadersMap) throws IOException {
@@ -68,14 +67,14 @@ public class WebAppStaticResourceServerConfiguration {
             pathStream.filter(Files::isRegularFile)
                     .forEach(filePath -> {
                         final String fileExtension = getFileExtension(filePath.toString());
-                        String filePathWithUiFolderAsParent = filePath.toString()
+                        String filePathRelativeToUiFolder = filePath.toString()
                                 .replace(uiResourcesDir.getParent(), "")
                                 .replace("\\", "/")
-                                .replace(CONTENT_ENCODING_FILE_EXTENSION, "");
+                                .replace(FILE_TYPE_OF_CONTENT_ENCODING, "");
                         final ResponseEntity<Flux<DataBuffer>> responseEntity = ok()
                                 .headers(httpHeadersMap.get(fileExtension))
                                 .body(read(filePath, DATA_BUFFER_FACTORY, DATA_BUFFER_SIZE).cache());
-                        cache.put(filePathWithUiFolderAsParent, just(responseEntity));
+                        cache.put(filePathRelativeToUiFolder, just(responseEntity));
                         if (filePath.endsWith(INDEX_FILE_NAME)) {
                             cache.put(UI_URL_PATH, just(responseEntity));
                         }
@@ -87,12 +86,25 @@ public class WebAppStaticResourceServerConfiguration {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(mediaType);
         headers.set("Content-Encoding", CONTENT_ENCODING);
-        headers.setCacheControl(maxAge(CACHE_CONTROL_DURATION));
+        headers.setCacheControl(maxAge(CACHE_CONTROL_MAX_AGE));
         return headers;
     }
 
     private String getFileExtension(String fileSystemPath) {
         final String[] filePathContent = fileSystemPath.split("[.]");
         return filePathContent[filePathContent.length - 2];
+    }
+
+    public static class StaticResourceCache {
+
+        private final ImmutableMap<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache;
+
+        public StaticResourceCache(ImmutableMap<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache) {
+            this.cache = cache;
+        }
+
+        public Mono<ResponseEntity<Flux<DataBuffer>>> get(String key) {
+            return cache.getOrDefault(key, cache.get(UI_URL_PATH));
+        }
     }
 }

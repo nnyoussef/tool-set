@@ -1,6 +1,6 @@
 package fr.nyo.web.server.starter;
 
-import com.google.common.collect.ImmutableMap;
+import fr.nyo.web.server.starter.WebAppStaticResourceServerConfiguration.StaticResourceCache;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +18,9 @@ public final class WebAppStaticResourceServerController {
 
     private static final String UI_URL_PATH = "/ui";
 
-    private final ImmutableMap<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache;
+    private final StaticResourceCache cache;
 
-    public WebAppStaticResourceServerController(ImmutableMap<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache) {
+    public WebAppStaticResourceServerController(StaticResourceCache cache) {
         this.cache = cache;
     }
 
@@ -28,7 +28,7 @@ public final class WebAppStaticResourceServerController {
     public Mono<ResponseEntity<Flux<DataBuffer>>> downloadFile(ServerWebExchange serverWebExchange) {
         return Mono.just(serverWebExchange)
                 .map(request -> serverWebExchange.getRequest().getPath().toString())
-                .flatMap(requestPath -> cache.getOrDefault(requestPath, cache.get(UI_URL_PATH)))
+                .flatMap(cache::get)
                 .subscribeOn(boundedElastic());
     }
 
