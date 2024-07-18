@@ -49,7 +49,7 @@ public class WebAppStaticResourceServerConfiguration {
     private static final String EMPTY = "";
 
     @Bean
-    public WebAppStaticResourceServerController provideWebApplicationStaticResourcesCache() throws IOException {
+    public WebAppStaticResourceServerController provideWebAppStaticResourceServerController() throws IOException {
         Properties mimeMappings = new Properties();
         mimeMappings.load(getClass().getClassLoader().getResourceAsStream(MIME_MAPPINGS_CLASSPATH_PATH));
         loadAllWebResourcesInCache(mimeMappings);
