@@ -97,13 +97,15 @@ public class WebAppStaticResourceServerConfiguration {
     public static class StaticResourceCache {
 
         private final ImmutableMap<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache;
+        private final Mono<ResponseEntity<Flux<DataBuffer>>> indexFileResponse;
 
         public StaticResourceCache(ImmutableMap<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache) {
             this.cache = cache;
+            this.indexFileResponse = cache.get(UI_URL_PATH);
         }
 
         public Mono<ResponseEntity<Flux<DataBuffer>>> get(String key) {
-            return cache.getOrDefault(key, cache.get(UI_URL_PATH));
+            return cache.getOrDefault(key, indexFileResponse);
         }
     }
 }
