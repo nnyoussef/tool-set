@@ -38,8 +38,10 @@ public class WebAppStaticResourceServerConfiguration {
     private static final ImmutableMap.Builder<String, Mono<ResponseEntity<Flux<DataBuffer>>>> CACHE = builder();
     private static final String INDEX_FILE_NAME = "index.html.br";
     private static final String MIME_MAPPINGS_CLASSPATH_PATH = "mime-mappings.properties";
+
     private static final String UI_URL_PATH = "/ui";
     private static final String UI_BASE_PATH_IN_CLASSPATH = "ui";
+
     private static final Duration CACHE_CONTROL_MAX_AGE = ofDays(365);
     private static final String CONTENT_ENCODING = "br";
     private static final String FILE_TYPE_OF_CONTENT_ENCODING = ".".concat(CONTENT_ENCODING);
