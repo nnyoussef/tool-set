@@ -44,7 +44,7 @@ public class WebAppStaticResourceServerConfiguration {
 
     private static final Duration CACHE_CONTROL_MAX_AGE = ofDays(365);
     private static final String CONTENT_ENCODING = "br";
-    private static final String FILE_TYPE_OF_CONTENT_ENCODING = ".".concat(CONTENT_ENCODING);
+    private static final String FILE_TYPE_OF_CONTENT_ENCODING = "." + CONTENT_ENCODING;
 
     @Bean
     public StaticResourceCache provideWebApplicationStaticResourcesCache() throws IOException {
@@ -60,14 +60,17 @@ public class WebAppStaticResourceServerConfiguration {
             pathStream.filter(Files::isRegularFile)
                     .forEach(filePath -> {
                         final String fileExtension = getFileExtension(filePath.toString());
-                        final MediaType mediaType = parseMediaType(mimeMappings.get(fileExtension).toString());
+                        final MediaType fileMimeType = parseMediaType(mimeMappings.get(fileExtension).toString());
+
                         String filePathRelativeToUiFolder = filePath.toString()
                                 .replace(uiResourcesDir.getParent(), "")
                                 .replace("\\", "/")
                                 .replace(FILE_TYPE_OF_CONTENT_ENCODING, "");
+
                         final ResponseEntity<Flux<DataBuffer>> responseEntity = ok()
-                                .headers(getHttpHeaders(mediaType))
+                                .headers(getHttpHeaders(fileMimeType))
                                 .body(read(filePath, DATA_BUFFER_FACTORY, DATA_BUFFER_SIZE).cache());
+
                         CACHE.put(filePathRelativeToUiFolder, just(responseEntity));
                         if (filePath.endsWith(INDEX_FILE_NAME)) {
                             CACHE.put(UI_URL_PATH, just(responseEntity));
