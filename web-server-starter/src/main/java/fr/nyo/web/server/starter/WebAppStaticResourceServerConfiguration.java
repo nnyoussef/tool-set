@@ -59,8 +59,7 @@ public class WebAppStaticResourceServerConfiguration {
         try (Stream<Path> pathStream = walk(of(uiResourcesDir.getAbsolutePath()))) {
             pathStream.filter(Files::isRegularFile)
                     .forEach(filePath -> {
-                        final String fileExtension = getFileExtension(filePath.toString());
-                        final MediaType fileMimeType = parseMediaType(mimeMappings.get(fileExtension).toString());
+                        final MediaType fileMimeType = getFileMediaType(filePath.toString(), mimeMappings);
 
                         String filePathRelativeToUiFolder = filePath.toString()
                                 .replace(uiResourcesDir.getParent(), "")
@@ -87,9 +86,12 @@ public class WebAppStaticResourceServerConfiguration {
         return headers;
     }
 
-    private String getFileExtension(String fileSystemPath) {
+    private MediaType getFileMediaType(String fileSystemPath,
+                                       Properties mimeMappings) {
         final String[] filePathContent = fileSystemPath.split("[.]");
-        return filePathContent[filePathContent.length - 2];
+        String extension = filePathContent[filePathContent.length - 2];
+        parseMediaType(mimeMappings.get(extension).toString());
+        return parseMediaType(mimeMappings.get(extension).toString());
     }
 
     public static class StaticResourceCache {
