@@ -46,6 +46,8 @@ public class WebAppStaticResourceServerConfiguration {
     private static final String UI_BASE_PATH_IN_CLASSPATH = "ui";
     private static final String UI_URL_PATH = "/" + UI_BASE_PATH_IN_CLASSPATH;
 
+    private static final String EMPTY = "";
+
     @Bean
     public StaticResourceCache provideWebApplicationStaticResourcesCache() throws IOException {
         Properties mimeMappings = new Properties();
@@ -54,40 +56,41 @@ public class WebAppStaticResourceServerConfiguration {
         return new StaticResourceCache(CACHE.build());
     }
 
-    private void loadAllWebResourcesInCache(Properties mimeMappings) throws IOException {
+    private void loadAllWebResourcesInCache(final Properties mimeMappings) throws IOException {
         File uiResourcesDir = new ClassPathResource(UI_BASE_PATH_IN_CLASSPATH).getFile();
         try (Stream<Path> pathStream = walk(of(uiResourcesDir.getAbsolutePath()))) {
             pathStream.filter(Files::isRegularFile)
                     .forEach(filePath -> {
-                        final MediaType fileMimeType = getFileMediaType(filePath.toString(), mimeMappings);
 
-                        String filePathRelativeToUiFolder = filePath.toString()
-                                .replace(uiResourcesDir.getParent(), "")
+                        final String filePathRelativeToUiFolder = filePath.toString()
+                                .replace(uiResourcesDir.getParent(), EMPTY)
                                 .replace("\\", "/")
-                                .replace(FILE_TYPE_OF_CONTENT_ENCODING, "");
+                                .replace(FILE_TYPE_OF_CONTENT_ENCODING, EMPTY);
 
                         final ResponseEntity<Flux<DataBuffer>> responseEntity = ok()
-                                .headers(getHttpHeaders(fileMimeType))
+                                .headers(getHttpHeaders(filePath.toString(), mimeMappings))
                                 .body(read(filePath, DATA_BUFFER_FACTORY, DATA_BUFFER_SIZE).cache());
 
                         CACHE.put(filePathRelativeToUiFolder, just(responseEntity));
                         if (filePath.endsWith(INDEX_FILE_NAME)) {
                             CACHE.put(UI_URL_PATH, just(responseEntity));
                         }
+
                     });
         }
     }
 
-    private HttpHeaders getHttpHeaders(MediaType mediaType) {
+    private HttpHeaders getHttpHeaders(final String fileSystemPath,
+                                       final Properties mimeMappings) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(mediaType);
+        headers.setContentType(getFileMediaType(fileSystemPath, mimeMappings));
         headers.set("Content-Encoding", CONTENT_ENCODING);
         headers.setCacheControl(maxAge(CACHE_CONTROL_MAX_AGE));
         return headers;
     }
 
-    private MediaType getFileMediaType(String fileSystemPath,
-                                       Properties mimeMappings) {
+    private MediaType getFileMediaType(final String fileSystemPath,
+                                       final Properties mimeMappings) {
         final String[] filePathContent = fileSystemPath.split("[.]");
         String extension = filePathContent[filePathContent.length - 2];
         parseMediaType(mimeMappings.get(extension).toString());
