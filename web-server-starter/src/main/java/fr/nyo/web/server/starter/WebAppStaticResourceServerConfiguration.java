@@ -17,14 +17,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
-import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Stream;
 
+import static com.google.common.collect.ImmutableMap.builder;
 import static java.nio.file.Files.walk;
 import static java.nio.file.Path.of;
+import static java.time.Duration.ofDays;
 import static org.springframework.core.io.buffer.DataBufferUtils.read;
 import static org.springframework.http.CacheControl.maxAge;
-import static org.springframework.http.MediaType.*;
+import static org.springframework.http.MediaType.parseMediaType;
 import static org.springframework.http.ResponseEntity.ok;
 import static reactor.core.publisher.Mono.just;
 
@@ -33,50 +35,40 @@ public class WebAppStaticResourceServerConfiguration {
 
     private static final int DATA_BUFFER_SIZE = 10_048_576;
     private static final DefaultDataBufferFactory DATA_BUFFER_FACTORY = new DefaultDataBufferFactory();
+    private static final ImmutableMap.Builder<String, Mono<ResponseEntity<Flux<DataBuffer>>>> CACHE = builder();
     private static final String INDEX_FILE_NAME = "index.html.br";
+    private static final String MIME_MAPPINGS_CLASSPATH_PATH = "mime-mappings.properties";
     private static final String UI_URL_PATH = "/ui";
+    private static final String UI_BASE_PATH_IN_CLASSPATH = "ui";
+    private static final Duration CACHE_CONTROL_MAX_AGE = ofDays(365);
     private static final String CONTENT_ENCODING = "br";
     private static final String FILE_TYPE_OF_CONTENT_ENCODING = ".".concat(CONTENT_ENCODING);
-    private static final String UI_BASE_PATH_IN_CLASSPATH = "ui";
-    private static final ImmutableMap.Builder<String, Mono<ResponseEntity<Flux<DataBuffer>>>> cache = ImmutableMap.builder();
-    private static final Duration CACHE_CONTROL_MAX_AGE = Duration.ofDays(365);
 
     @Bean
     public StaticResourceCache provideWebApplicationStaticResourcesCache() throws IOException {
-        Map<String, HttpHeaders> httpHeadersMap = ImmutableMap.<String, HttpHeaders>builder()
-                .put("html", getHttpHeaders(TEXT_HTML))
-                .put("js", getHttpHeaders(parseMediaType("text/javascript")))
-                .put("webp", getHttpHeaders(parseMediaType("image/webp")))
-                .put("json", getHttpHeaders(APPLICATION_JSON))
-                .put("ico", getHttpHeaders(parseMediaType("image/x-icon")))
-                .put("jpeg", getHttpHeaders(IMAGE_JPEG))
-                .put("png", getHttpHeaders(IMAGE_PNG))
-                .put("gif", getHttpHeaders(IMAGE_GIF))
-                .put("txt", getHttpHeaders(TEXT_PLAIN))
-                .put("xml", getHttpHeaders(TEXT_XML))
-                .put("pdf", getHttpHeaders(APPLICATION_PDF))
-                .put("css", getHttpHeaders(parseMediaType("text/css")))
-                .build();
-        loadAllWebResourcesInCache(httpHeadersMap);
-        return new StaticResourceCache(cache.build());
+        Properties mimeMappings = new Properties();
+        mimeMappings.load(getClass().getClassLoader().getResourceAsStream(MIME_MAPPINGS_CLASSPATH_PATH));
+        loadAllWebResourcesInCache(mimeMappings);
+        return new StaticResourceCache(CACHE.build());
     }
 
-    private void loadAllWebResourcesInCache(Map<String, HttpHeaders> httpHeadersMap) throws IOException {
+    private void loadAllWebResourcesInCache(Properties mimeMappings) throws IOException {
         File uiResourcesDir = new ClassPathResource(UI_BASE_PATH_IN_CLASSPATH).getFile();
         try (Stream<Path> pathStream = walk(of(uiResourcesDir.getAbsolutePath()))) {
             pathStream.filter(Files::isRegularFile)
                     .forEach(filePath -> {
                         final String fileExtension = getFileExtension(filePath.toString());
+                        final MediaType mediaType = parseMediaType(mimeMappings.get(fileExtension).toString());
                         String filePathRelativeToUiFolder = filePath.toString()
                                 .replace(uiResourcesDir.getParent(), "")
                                 .replace("\\", "/")
                                 .replace(FILE_TYPE_OF_CONTENT_ENCODING, "");
                         final ResponseEntity<Flux<DataBuffer>> responseEntity = ok()
-                                .headers(httpHeadersMap.get(fileExtension))
+                                .headers(getHttpHeaders(mediaType))
                                 .body(read(filePath, DATA_BUFFER_FACTORY, DATA_BUFFER_SIZE).cache());
-                        cache.put(filePathRelativeToUiFolder, just(responseEntity));
+                        CACHE.put(filePathRelativeToUiFolder, just(responseEntity));
                         if (filePath.endsWith(INDEX_FILE_NAME)) {
-                            cache.put(UI_URL_PATH, just(responseEntity));
+                            CACHE.put(UI_URL_PATH, just(responseEntity));
                         }
                     });
         }
