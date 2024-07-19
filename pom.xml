@@ -21,6 +21,21 @@
         <module>web-server-starter</module>
     </modules>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/nnyoussef/mvn-repos</url>
+        </repository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/nnyoussef/mvn-repos</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>
