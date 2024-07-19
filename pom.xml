@@ -24,14 +24,14 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
+            <name>Nassim-Niclas Youssef Maven Repository</name>
             <url>https://maven.pkg.github.com/nnyoussef/mvn-repos</url>
         </repository>
     </distributionManagement>
     <repositories>
         <repository>
             <id>github</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
+            <name>Nassim-Niclas Youssef Maven Repository</name>
             <url>https://maven.pkg.github.com/nnyoussef/mvn-repos</url>
         </repository>
     </repositories>
